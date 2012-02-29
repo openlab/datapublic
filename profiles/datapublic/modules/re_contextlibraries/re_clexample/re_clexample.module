@@ -1,0 +1,53 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Provides the RE CL Example javascript library and styles to the RE Context
+ * Libraries module.
+ */
+
+
+// Constants:
+define('RE_CLEXAMPLE_MODULE_MACHINE_NAME', 're_clexample');
+define('RE_CLEXAMPLE_LIBRARY_MACHINE_NAME', 're_clexample');
+define('RE_CLEXAMPLE_LIBRARY_TITLE', 'RE CL Example library (provided by: re_clexample)');
+
+
+/**
+ * Implements hook_define_re_contextlibraries_library().
+ */
+function re_clexample_define_re_contextlibraries_library() {
+  return array(RE_CLEXAMPLE_MODULE_MACHINE_NAME . ':' . RE_CLEXAMPLE_LIBRARY_MACHINE_NAME => t(RE_CLEXAMPLE_LIBRARY_TITLE));
+} // re_clexample_define_re_contextlibraries_library()
+
+
+/**
+ * Implements hook_library().
+ *
+ * Used to register libraries with the system.
+ *
+ * @todo Figure out why dependencies do NOT work here.
+ */
+function re_clexample_library() {
+  $path_to_module = drupal_get_path('module', RE_CLEXAMPLE_MODULE_MACHINE_NAME);
+  $libraries[RE_CLEXAMPLE_LIBRARY_MACHINE_NAME] = array(
+    'title' => RE_CLEXAMPLE_LIBRARY_TITLE,
+    'website' => 'http://example.com/',
+    'version' => '1.0',
+    'js' => array(
+      $path_to_module . '/js/re_clexample.js' => array(
+        'group' => JS_LIBRARY,
+        'weight' => 1,
+      ),
+    ),
+    'css' => array(
+      $path_to_module . '/css/re_clexample.css' => array(
+        'group' => CSS_DEFAULT,
+        'weight' => 1,
+      ),
+    ),
+    //'dependencies' => array('re_contextlibraries', 're_contextlibraries'),
+  );
+  return $libraries;
+} // re_clexample_library()

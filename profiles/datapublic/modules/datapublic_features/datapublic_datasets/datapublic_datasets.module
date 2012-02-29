@@ -1,0 +1,86 @@
+<?php
+/**
+ * @file
+ * Code for the DataPublic Datasets feature.
+ */
+
+include_once('datapublic_datasets.features.inc');
+include_once('datapublic_datasets.theme.inc');
+/**
+ * These functions determine the values for the CCK computed fields.
+ * @see http://drupal.org/node/149225
+ */
+function computed_field_field_dataset_csv_compute(&$entity_field, $entity_type, $entity, $field, $instance, $langcode, $items) {
+  $entity_field[0]['value'] = datapublic_datasets_format_checker($entity, array('field_dataset_upload', 'field_dataset_external'), array('field_dataset_upload_file_format', 'field_dataset_external_format'), 'CSV', $langcode);  
+} // computed_field_field_dataset_csv_compute()
+
+function computed_field_field_dataset_dwg_compute(&$entity_field, $entity_type, $entity, $field, $instance, $langcode, $items) {
+  $entity_field[0]['value'] = datapublic_datasets_format_checker($entity, array('field_dataset_upload', 'field_dataset_external'), array('field_dataset_upload_file_format', 'field_dataset_external_format'), 'DWG', $langcode);  
+} // computed_field_field_dataset_dwg_compute()
+
+function computed_field_field_dataset_kml_compute(&$entity_field, $entity_type, $entity, $field, $instance, $langcode, $items) {
+  $entity_field[0]['value'] = datapublic_datasets_format_checker($entity, array('field_dataset_upload', 'field_dataset_external'), array('field_dataset_upload_file_format', 'field_dataset_external_format'), 'KML', $langcode);  
+} // computed_field_field_dataset_kml_compute()
+
+function computed_field_field_dataset_kmz_compute(&$entity_field, $entity_type, $entity, $field, $instance, $langcode, $items) {
+  $entity_field[0]['value'] = datapublic_datasets_format_checker($entity, array('field_dataset_upload', 'field_dataset_external'), array('field_dataset_upload_file_format', 'field_dataset_external_format'), 'KMZ', $langcode);  
+} // computed_field_field_dataset_kmz_compute()
+
+function computed_field_field_dataset_shp_compute(&$entity_field, $entity_type, $entity, $field, $instance, $langcode, $items) {
+  $entity_field[0]['value'] = datapublic_datasets_format_checker($entity, array('field_dataset_upload', 'field_dataset_external'), array('field_dataset_upload_file_format', 'field_dataset_external_format'), 'SHP', $langcode);  
+} // computed_field_field_dataset_shp_compute()
+
+function computed_field_field_dataset_xls_compute(&$entity_field, $entity_type, $entity, $field, $instance, $langcode, $items) {
+  $entity_field[0]['value'] = datapublic_datasets_format_checker($entity, array('field_dataset_upload', 'field_dataset_external'), array('field_dataset_upload_file_format', 'field_dataset_external_format'), 'XLS', $langcode);  
+} // computed_field_field_dataset_xls_compute()
+
+function computed_field_field_dataset_xml_compute(&$entity_field, $entity_type, $entity, $field, $instance, $langcode, $items) {
+  $entity_field[0]['value'] = datapublic_datasets_format_checker($entity, array('field_dataset_upload', 'field_dataset_external'), array('field_dataset_upload_file_format', 'field_dataset_external_format'), 'XML', $langcode);  
+} // computed_field_field_dataset_xml_compute()
+
+function computed_field_field_dataset_api_compute(&$entity_field, $entity_type, $entity, $field, $instance, $langcode, $items) {
+  $entity_field[0]['value'] = datapublic_datasets_format_checker($entity, array('field_dataset_upload', 'field_dataset_external'), array('field_dataset_upload_file_format', 'field_dataset_external_format'), 'API', $langcode);  
+} // computed_field_field_dataset_api_compute()
+
+
+/**
+ * Check the value of the Format select list for each field in the dataset.
+ *
+ * @param object $entity The entity object
+ * @param array $field_collection_ids The array of field collection ids to check for other fields in
+ * @param array $field_ids_to_check The array of cck format fields to check for a set value
+ * @param string $format The format we want to match the values in the above cck fields to
+ * @param string $langcode The language code string to determine positioning in field arrays
+ *
+ * @return string The themed format value to populate the computed, if the actual CCK format field is set.
+ */
+function datapublic_datasets_format_checker(&$entity, $field_collection_ids, $field_ids_to_check, $format, $langcode) {
+  // Loop through the field_collection fields...
+  foreach($field_collection_ids as $field_collection_id) {
+    
+    // For each field_collection entity, get the value (ID) of the field_collection field and load the actual field_collection entity...
+    foreach ($entity->{$field_collection_id}[$langcode] as $entity_id) {
+    
+      $new_entity = entity_load('field_collection_item', array($entity_id['value']));
+      // Now check the new entity to see if it contains any of the field's (field_ids_to_check) we're looking for...
+      foreach($field_ids_to_check as $field_id_to_check) {
+        if(isset($new_entity[$entity_id['value']]->{$field_id_to_check})) {
+          $format_field_value = $new_entity[$entity_id['value']]->{$field_id_to_check}[$langcode][0]['value'];
+          // If the format value in the field matches the format we're checking for...
+          if($format == $format_field_value) {
+            $formats[] = $format;
+            watchdog('datasets', '<pre>'. print_r(theme('dataset_indicators', $formats), TRUE) . '</pre>');
+            break 3; // We've gotten what we need, now break out of the 3 for loops, theme and return...
+          // If the format is the API we must return whatever the user has entered...
+          } elseif($format == 'API' && !in_array($format_field_value, array('CSV', 'DWG', 'KML', 'KMZ', 'SHP', 'XLS', 'XML'))) {
+            $formats[] = $format_field_value;
+          }
+        }
+    
+      }
+    
+    }  
+  
+  }
+  return theme('dataset_indicators', $formats);
+} // datapublic_datasets_format_checker()

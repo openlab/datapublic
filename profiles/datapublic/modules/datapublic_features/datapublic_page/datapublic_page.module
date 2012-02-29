@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Datapublic Page feature.
+ */
+
+include_once('datapublic_page.features.inc');

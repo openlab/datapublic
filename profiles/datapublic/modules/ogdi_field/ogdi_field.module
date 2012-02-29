@@ -1,0 +1,754 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * The CCK hooks for creating an OGDI field, plus all the code
+ * to retrieve the necessary data from OGDI itself.
+ */
+
+module_load_include('inc', 'ogdi_field', 'ogdi_field.markers');
+
+/**
+ * Maximum URLs length - needs to match value in link.install.
+ */
+define('OGDI_URL_MAX_LENGTH', 2048);
+
+
+/**
+ * Implements hook_menu().
+ */
+function ogdi_field_menu() {
+  // Bing Map settings.
+  $items['admin/config/services/bing'] = array(
+    'title' => 'OGDI field - Bing Maps API',
+    'description' => 'OGDI field - Bing Maps API.',
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('ogdi_field_admin_settings'),
+    'access arguments' => array('access administration pages'),
+  );
+  return $items;
+}
+
+
+/**
+ * @function
+ * OGDI Field Bing Map API settings form
+ */
+function ogdi_field_admin_settings($form, &$form_state) {
+  $form['ogdi_bing']['bingmaps_api_key'] = array(
+    '#title' => 'Bing Maps API Key',
+    '#type' => 'textfield',
+    '#default_value' => variable_get('bingmaps_api_key', ''),
+    '#description' => t('Enter you Bing Maps API key here. If you do not have one, please sign up for one at ' . l('http://www.bingmapsportal.com', 'http://www.bingmapsportal.com')),
+    '#size' => 50,
+    '#maxlength' => 255,
+  );
+  return system_settings_form($form);
+}
+
+
+/**
+ * Implements hook_theme().
+ */
+function ogdi_field_theme() {
+  return array(
+    // Themes for the formatters.
+    'ogdi_field_formatter_default' => array(
+      'variables' => array('display_url' => NULL, 'delta' => NULL, 'markers' => NULL, 'field' => NULL),
+      'file' => 'ogdi_field_formatter.inc',
+    ),
+    'ogdi_field_formatter_plain' => array(
+      'variables' => array('display_url' => NULL),
+      'file' => 'ogdi_field_formatter.inc',
+    ),
+    'ogdi_field_formatter_link' => array(
+      'variables' => array('display_url' => NULL),
+      'file' => 'ogdi_field_formatter.inc',
+    ),
+    'ogdi_field_filter' => array(
+      'variables' => array(),
+      'file' => 'ogdi_field_formatter.inc',
+    ),
+    'ogdi_field_container' => array(
+      'variables' => array('ogdi' => NULL, 'headers' => NULL, 'rows' => NULL, 'parameters' => NULL, 'delta' => NULL),
+      'file' => 'ogdi_field_formatter.inc',
+    ),
+    'ogdi_field_datatable' => array(
+      'variables' => array('headers' => NULL, 'rows' => NULL, 'datasource' => NULL, 'dataset_id' => NULL, 'parameters' => NULL),
+      'file' => 'ogdi_field_formatter.inc',
+    ),
+    'ogdi_field_map' => array(
+      'variables' => array('datasource' => NULL, 'dataset_id' => NULL, 'parameters' => NULL, 'delta' => NULL),
+      'file' => 'ogdi_field_formatter.inc',
+    ),
+    'ogdi_field_helptext' => array(
+      'file' => 'ogdi_field_formatter.inc',
+    ),
+    'ogdi_field_atom_link' => array(
+      'variables' => array('datasource' => NULL, 'dataset_id' => NULL, 'querystring' => NULL),
+      'file' => 'ogdi_field_formatter.inc',
+    ),
+    'ogdi_field_download_link' => array(
+      'variables' => array('datasource' => NULL, 'dataset_id' => NULL, 'querystring' => NULL),
+      'file' => 'ogdi_field_formatter.inc',
+    ),
+    'ogdi_field' => array(
+      'render element' => 'element',
+    ),
+
+  );
+}
+
+
+//==========================================//
+// DEFINING A FIELD
+//==========================================//
+
+/**
+ * Implements hook_field_info().
+ *
+ * Provides the description of the field.
+ */
+function ogdi_field_field_info() {
+  return array(
+    // We name our field as the associative name of the array.
+    'ogdi_field_ogdi' => array(
+      'label' => t('OGDI'),
+      'description' => t('The URL of an OGDI dataset.'),
+      'default_widget' => 'ogdi_field_ogdi_widget',
+      'default_formatter' => 'ogdi_field_formatter_default',
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_field_settings_form().
+ *  
+ * Invoked from field_ui_field_settings_form() to allow 
+ * the module defining the field to add global settings 
+ * (i.e. settings that do not depend on the bundle or instance) 
+ * to the field settings form. If the field already has data, 
+ * only include settings that are safe to change.
+ *
+ */
+function ogdi_field_field_settings_form($field, $instance, $has_data) {
+  $settings = $field['settings'];
+  $form = array();
+  $form['ogdi_field_label'] = array(
+    '#type'   =>  'textfield',
+    '#title'  =>  t('Label'),
+    '#default_value' => !empty($settings['ogdi_field_label']) ? t($settings['ogdi_field_label']) : t('Filter expression ($filter)'),
+    '#description'  =>  t('The value for the label of the Filter box on the dataset page.'),
+  );
+  
+  $form['ogdi_field_description'] = array(
+    '#type'   =>  'textarea',
+    '#title'  =>  t('Description'),
+    '#default_value' => !empty($settings['ogdi_field_description']) ? $settings['ogdi_field_description'] : t('Use this box to write expressions that will filter the data below.'),
+    '#description'  =>  t('The description which appears under/next to the Filter box on the dataset page. This is usually the OGDI filter documentation.'),
+    '#rows'   => 20,
+  );
+
+  // Load in default helptext
+  $filter_helptext = file_get_contents(drupal_get_path('module', 'ogdi_field') . '/ogdi_field_helptext.txt');
+  
+  $form['ogdi_field_helptext'] = array(
+    '#type'   =>  'textarea',
+    '#title'  =>  t('Help Text'),
+    '#default_value' => !empty($settings['ogdi_field_helptext']) ? t($settings['ogdi_field_helptext']) : t($filter_helptext),
+    '#description'  =>  t('The help text that will appear enclosed in a tooltip to the right of the filter textarea.'),
+    '#rows'   => 20,
+  );
+  
+  return $form;
+}
+
+
+/**
+ * Implements hook_field_presave().
+ */
+function ogdi_field_field_presave($entity_type, $entity, $field, $instance, $langcode, &$items) {
+  if ($field['type'] == 'ogdi_field_ogdi') {
+    foreach ($items as $delta => &$item) {
+      $new_item = array();
+      $new_item['url'] = $item['url'];
+      foreach(ogdi_field_markers() as $marker => $field) {
+        $new_item[$marker] = $item['markers'][$marker];
+      }
+      $item = $new_item;
+    }
+  }
+}
+
+/**
+ * Implements hook_field_load().
+ */
+function ogdi_field_field_load($entity_type, $entities, $field, $instances, $langcode, &$items, $age) {
+  foreach ($entities as $id => $entity) {
+    foreach ($items[$id] as $delta => &$item) {
+      $new_item = array();
+      $new_item['url'] = $item['url'];
+      foreach(ogdi_field_markers() as $marker => $topping) {
+        $new_item['markers'][$marker] = $item[$marker];
+      }
+      $item = $new_item;
+    }
+  }
+}
+
+
+//==========================================//
+// DEFINING A WIDGET FOR THE NODE EDIT FORM
+//==========================================//
+
+
+/**
+ * Implements hook_field_widget_info().
+ *
+ * One widget is provided.
+ * - A simple text-only widget where the user enters the URL.
+ *
+ * These widget types will eventually show up in hook_field_widget_form,
+ * where we will have to flesh them out.
+ *
+ * @see ogdi_field_field_widget_form()
+ */
+function ogdi_field_field_widget_info() {
+  return array(
+    'ogdi_field_ogdi_widget' => array(
+      'label' => t('OGDI'),
+      'field types' => array('ogdi_field_ogdi'),
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_field_widget_form().
+ *
+ * http://api.drupal.org/api/drupal/modules--field--field.api.php/function/hook_field_widget_form/7
+ * 
+ * Here we define a form element that the user inputs data
+ * into. If we have a complex custom field, we can have many sub-elements
+ * organized into fieldsets.
+ */
+function ogdi_field_field_widget_form(&$form, &$form_state, $field, $instance, $langcode, $items, $delta, $element) {
+  // $field_name is the name of the field instance. This is the
+  // name that the administrator gives the field instance when
+  // attaching it to an entity.
+  $field_name = $instance['field_name'];
+
+  // Is this field instance required?
+  // We can use this $required value to make sub-elements of the
+  // widget form required.
+  $required = $element['#required'];
+
+  // $item is where the current saved values are stored
+  $item =& $items[$delta];
+
+  $options = array();
+
+  /*if(isset($item['url'])) {
+    $datainfo = ogdi_field_get_data_info($item['url']);
+    $ogdi = ogdi_field_ogdi($datainfo['datasource'], $datainfo['dataset']);
+    $metadata = ogdi_field_get_metadata($ogdi);
+    foreach($metadata->d[0] as $meta => $value) {
+      $options[$meta] = $meta;
+    }
+  }*/
+
+  // $element is already populated with #title, #description, #delta,
+  // #required, #field_name, etc.
+  //
+  // In this example, $element is a fieldset, but it could be any element
+  // type (textfield, checkbox, etc.)
+  $element += array(
+    '#type' => 'fieldset',
+  );
+
+  // Array keys in $element correspond roughly
+  // to array keys in $item, which correspond
+  // roughly to columns in the database table.
+  $element['url'] = array(
+    '#title' => t('URL'),
+    '#type' => 'textfield',
+    '#required' => $required,
+    // use #default_value to prepopulate the element
+    // with the current saved value
+    '#default_value' => isset($item['url']) ? $item['url'] : '',
+  );
+
+  /*$element['submit'] = array(
+    '#value' => t('Get Marker Metadata'),
+    '#type' => 'button',
+    '#ajax' => array (
+      'callback' => 'ogdi_field_get_metadata_callback',
+      'wrapper' => 'marker-info-'. $delta,
+    ),
+    '#name' => 'button-' . $delta,
+    '#limit_validation_errors' => array(),
+  );*/
+
+  // Have a separate fieldset for non-meat toppings
+  $element['markers'] = array(
+    '#title' => t('Marker Information'),
+    '#type' => 'fieldset',
+    '#prefix' => '<div id="marker-info-'. $delta .'">',
+    '#suffix' => '</div>',
+    '#description' => t('Please choose which columns/fields from the dataset that will be used to create the map markers in the display. You can determine which ones to choose by looking at the dataset table column headers in the display on in the OGDI Data View'),
+  );
+
+  // Create a checkbox item for each topping on the menu
+  foreach (ogdi_field_markers() as $marker=>$name) {
+    $element['markers'][$marker] = array(
+      '#title' => t($name),
+      //'#type' => 'select',
+      '#type' => 'textfield',
+      '#size' => 255,
+      '#default_value' => isset($item['markers'][$marker]) ? $item['markers'][$marker] : '',
+      '#description' => t('Please enter the name of a columns/header from the data table.'),
+      //'#options' => $options,
+    );
+  }
+  
+  // Set some specific values...
+  $element['markers']['title']['#default_value'] = isset($item['markers']['title']) ? $item['markers']['title'] : 'PartitionKey';
+  $element['markers']['latitude']['#default_value'] = isset($item['markers']['latitude']) ? $item['markers']['latitude'] : 'latitude';
+  $element['markers']['longitude']['#default_value'] = isset($item['markers']['latitude']) ? $item['markers']['longitude'] : 'longitude';
+  $element['markers']['description']['#description'] = t('Please enter the name of a columns/header from the data table. You can also enter multiple values separated by a comma with no spaces, eg. city,address,postal_code');
+
+  return $element;
+}
+
+
+/**
+ * Implements hook_field_validate().
+ *
+ * This hook gives us a chance to validate content that's in our
+ * field. We're really only interested in the $items parameter, since
+ * it holds arrays representing content in the field we've defined.
+ * We want to verify that the items only contain valid URLS's. 
+ * If the item validates, we do nothing. If it doesn't
+ * validate, we add our own error notification to the $errors parameter.
+ *
+ * @see ogdi_field_field_widget_error()
+ */
+function ogdi_field_field_validate($entity_type, $entity, $field, $instance, $langcode, $items, &$errors) {
+  foreach ($items as $delta => $item) {
+    if (!empty($item['url'])) {
+      // Check if there's a trailing slash...
+      if (substr($item['url'], -1) == "/") { 
+       $errors[$field['field_name']][$langcode][$delta][] = array(
+          'error' => 'ogdi_field_invalid',
+          'message' => t('%name: must not have a trailing slash, please remove the last slash.', array('%name' => $field['widget']['label'])),
+        );
+      }
+      // Check if it's a valid URL...
+      if (!preg_match("/^(https?:\/\/)?([\da-z\.-]+)\.([a-z\.]{2,6})([\/\w \.-]*)*\/?$/", $item['url'])) {
+        $errors[$field['field_name']][$langcode][$delta][] = array(
+          'error' => 'ogdi_field_invalid',
+          'message' => t('%name: must be a valid URL including http://.', array('%name' => $field['widget']['label'])),
+        );
+      }
+    }
+  }
+}
+
+
+/**
+ * Implements hook_field_is_empty().
+ *
+ * hook_field_is_emtpy() is where Drupal asks us if this field is empty.
+ * Return TRUE if it does not contain data, FALSE if it does. This lets
+ * the form API flag an error when required fields are empty.
+ */
+function ogdi_field_field_is_empty($item, $field) {
+  $has_stuff = FALSE;
+  foreach (ogdi_field_markers() as $marker=>$field_id) {
+    if (isset($item[$marker]) && $item['toppings'][$marker] == 1) {
+      $has_stuff = TRUE;
+    }
+  }
+  if (!empty($item['url'])) {
+    $has_stuff = TRUE;
+  }
+  return !$has_stuff;
+}
+
+
+//==========================================//
+// DEFINING A FORMATTER
+//==========================================//
+
+
+/**
+ * Implements hook_field_formatter_info().
+ *
+ * We need to tell Drupal that we have one types of formatter
+ * for this field. 
+ *
+ * @see ogdi_field_field_formatter_view()
+ */
+function ogdi_field_field_formatter_info() {
+  return array(
+    // This formatter display the map and the table.
+    'ogdi_field_default' => array(
+      'label' => t('OGDI Embed (default)'),
+      'field types' => array('ogdi_field_ogdi'),
+      'description' => t('Embeds OGDI data.'),
+      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+    ),
+    // This formatter just displays the URL as plain text.
+    'ogdi_field_plain' => array(
+      'label' => t('OGDI URL as plain text'),
+      'field types' => array('ogdi_field_ogdi'),
+      'description' => t('Outputs OGDI URL as plain text.'),
+      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+    ),
+    // This formatter just displays the URL as a link.
+    'ogdi_field_link' => array(
+      'label' => t('OGDI URL as a link'),
+      'field types' => array('ogdi_field_ogdi'),
+      'description' => t('Outputs OGDI URL a link.'),
+      'multiple values' => FIELD_BEHAVIOR_DEFAULT,
+    ),
+  );
+}
+
+
+/**
+ * Implements hook_field_formatter_view().
+ *
+ * One formatter is implemented.
+ * - ogdi_field_default just outputs markup containing the rendered table and map
+ *
+ * @see ogdi_field_field_formatter_info()
+ */
+function ogdi_field_field_formatter_view($entity_type, $entity, $field, $instance, $langcode, $items, $display) {
+  $element = array();
+  switch ($display['type']) {
+    // This formatter simply outputs the field as text and with a color.
+    case 'ogdi_field_default':
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array(
+          // Pass the a display_url variable to the theme function. 
+          // @see $variables in theme_ogdi_field_formatter_default
+          '#display_url' => $item['url'],
+          '#delta'  => $delta,
+          '#markers' => $item['markers'],
+          '#field' => $field,
+          '#theme' => 'ogdi_field_formatter_default',
+        );
+      }
+      break;
+
+    // This formatter simply outputs the field as text.
+    case 'ogdi_field_plain':
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array(   
+          '#display_url' => $item['url'],
+          '#theme' =>  'ogdi_field_formatter_plain',
+        );
+      }
+      break;
+
+    // This formatter simply outputs the field as a link.
+    case 'ogdi_field_link':
+      foreach ($items as $delta => $item) {
+        $element[$delta] = array(   
+          '#display_url' => $item['url'],
+          '#theme' =>  'ogdi_field_formatter_link',
+        );
+      }
+      break;
+  } 
+  return $element;
+}
+
+
+//==========================================//
+// RETRIEVING THE DATA
+//==========================================//
+
+/**
+ * Creates the ogdi Object.
+ *
+ * Initializes it in one central place reusing it if needed.
+ *
+ * @param $datasource
+ *   A string containing the path to the datasource container.
+ *
+ * @param $dataset_id
+ *   A string containing the name of the dataset to retrieve.
+ *
+ * @return
+ *   A full OGDI object.
+ */
+function ogdi_field_ogdi($datasource = NULL, $dataset_id = NULL) {
+  //static $ogdi = NULL;
+  if (!$ogdi) {
+    require_once(dirname(__FILE__) . '/ogdi-api.php');
+    $ogdi = new Ogdi($datasource, $dataset_id);
+  }
+  return $ogdi;
+}
+
+
+/**
+ * Function to retrieve metadata of a certain dataset from OGDI.
+ *
+ * Empty e-mail addresses are allowed. See RFC 2822 for details.
+ *
+ * @param $ogdi
+ *   An OGDI object.
+ *
+ * @return
+ *   An array of Metadata for a specific dataset, built from decoded JSON data.
+ */
+function ogdi_field_get_metadata($ogdi) {
+  try {
+    $data = $ogdi->getEntityMetadata(array('$filter' => "entityset eq '". $ogdi->dataset_id ."'", 'format' => 'json' ));  
+  } catch (OgdiException $e) {
+    watchdog('ogdi', $e->getMessage());
+    drupal_set_message(t('Failed to get Metadata for %dataset', array('%dataset' => $ogdi->dataset_id)), 'warning');
+  }
+  $results = json_decode($data);
+  return $results;
+}
+
+/*function ogdi_field_get_metadata_callback($form, $form_state) {
+  $field_name = $form_state['triggering_element']['#array_parents'][0];
+  $delta = trim($form_state['clicked_button']['#name'] , 'button-');
+  $items = $form[$field_name][$form['#node']->language][$delta];
+  
+  $datainfo = ogdi_field_get_data_info($items['url']['#value']);
+  $ogdi = ogdi_field_ogdi($datainfo['datasource'], $datainfo['dataset']);
+  $metadata = ogdi_field_get_metadata($ogdi);
+  foreach($metadata->d[0] as $meta => $value) {
+    $options[$meta] = $meta;
+  }
+
+  $form[$field_name][$form['#node']->language][$delta]['markers']['title']['#options'] = $options;
+  $form[$field_name][$form['#node']->language][$delta]['markers']['description']['#options'] = $options;
+  $form[$field_name][$form['#node']->language][$delta]['markers']['latitude']['#options'] = $options;
+  $form[$field_name][$form['#node']->language][$delta]['markers']['longitude']['#options'] = $options;
+
+  return drupal_render($form[$field_name][$form['#node']->language][$delta]['markers']);
+}*/
+
+/**
+ * Function to retrieve the full data of a certain dataset from OGDI.
+ *
+ * @param $ogdi
+ *   An OGDI object.
+ *
+ * @param $parameters
+ *   An array of querystring parameters to pass to the API callt.
+ *
+ * @return
+ *   An array of Metadata for a specific dataset, built from decoded JSON data.
+ */
+function ogdi_field_get_data($ogdi, $parameters) {
+  try {
+    $data = $ogdi->getDataset($ogdi->dataset_id, $parameters);
+  } catch (OgdiException $e) {
+    watchdog('ogdi', $e->getMessage());
+    drupal_set_message(t('Failed to get data for %dataset ', array('%dataset' => $ogdi->dataset_id)) , 'warning');
+  }
+  $results = json_decode($data);
+  return $results;
+}
+
+
+/**
+ * Function to retrieve the dataset id and datasource path 
+ * from the full URL
+ * 
+ * @param $url string
+ *    The full URL of the OGDI instance
+ *
+ * @return
+ *    An array containing the dataset id and the datasource path
+ */
+function ogdi_field_get_data_info($url) {
+  // Filter out any harmful stuff
+  $field_url = filter_xss($url);
+  
+  // Get the ID of the actual Dataset, should be the last element in the array
+  $new_url = parse_url($field_url);
+  $dataset_path = explode('/', $new_url['path']); // explode('/', substr($field_url, 7));
+  $dataset_id = $dataset_path[count($dataset_path) - 1]; 
+  
+  // Get the path to the actual Datasource instance
+  $datasource = $new_url['scheme'] . '://' . $new_url['host'] . '/' . implode('/', array_slice($dataset_path, 1, -1));
+  
+  return array (
+    'dataset' => $dataset_id,
+    'datasource' => $datasource,
+  );
+}
+
+
+//==========================================//
+// BUILDING THE DATA
+//==========================================//
+
+
+/**
+ * Function to build table headers from OGDI meta data response.
+ *
+ * @param $data
+ *   An array containing dataset metadata.
+ *
+ * @return
+ *   An array of table headers that can be used by theme_table().
+ */
+function ogdi_field_build_table_headers($data) {
+  // Cast the Object into an array...
+  $data = (array) $data;
+  // Remove the first 6 elements, they are not needed...
+  $data = array_slice($data, 6);
+  foreach ($data as $name => $type) {
+    $headers[] = filter_xss($name); 
+  }
+  return $headers;
+}
+
+
+/**
+ * Function to build table from OGDI meta data response.
+ *
+ * @param $data
+ *   An array containing the data returned from an API call.
+ *
+ * @param $headers
+ *  An array of table headers gotten from ogdi_field_build_table_headers().
+ *
+ * @return
+ *   An array of rows that can be used by theme_table().
+ */
+function ogdi_field_build_table($data, $headers) {
+  foreach ($data as $row) {
+    $row = (array) $row;  // Cast row from an Object to an array...
+    $row = array_slice($row, 4);  // Remove the first 4 items, they are not needed...
+    for ($i=0; $i<=count($headers)-1; $i++) { 
+      // We now need to match each column in a row with a header...
+      // Create a new array and set it's key to be the name of the header column...
+      // Set it's value to be the value for that column in the current row, it may be empty...
+      $new_row[$headers[$i]] = $row[$headers[$i]];
+    }
+    $rows[] = $new_row;
+  }
+  return $rows;
+}
+
+
+/**
+ * Implements hook_form().
+ */
+function ogdi_field_data_form($form, $form_state, $variables) {
+  $form = array();
+  $delta = $variables['delta'];
+  
+  // Get the field settings. I had to pass the field through the formatter to get it back in here. 
+  $field = field_info_field_by_id($variables['field']['id']);
+  $settings = $field['settings'];
+
+  $form['query'] = array(
+    '#title' => t('Filter the dataset'),
+    '#type' => 'fieldset',
+    '#collapsed' => TRUE,
+    '#collapsible' => TRUE
+  );  
+  
+  $form['query']['filter'] = array(
+    '#type'         =>  'textarea',
+    '#title'        =>  $settings['ogdi_field_label'],
+    '#description'  =>  $settings['ogdi_field_description'],
+    //'#element_validate' =>  array('ogdi_field_filter_validate')
+  );
+  
+  $form['query']['helptext'] = array(
+    '#value'        =>  $settings['ogdi_field_helptext'],
+    '#theme'        =>  'ogdi_field_helptext'
+  );
+
+  $form['query']['delta'] = array(
+    '#type'   => 'hidden',
+    '#value'  => $variables['delta'],
+  );
+    
+  $form['query']['datasource'] = array(
+    '#type'   => 'hidden',
+    '#value'  => $variables['ogdi']->datasource,
+  );
+  
+  $form['query']['dataset_id'] = array(
+    '#type'   => 'hidden',
+    '#value'  => $variables['ogdi']->dataset_id,
+  );
+  
+  // On submit we want to run an ajax callback...
+  $form['query']['submit'] = array(
+    '#type'   =>  'submit',
+    '#value'  =>  t('Run'),
+    '#ajax' => array(
+      'callback' => 'ogdi_field_filter_callback',  // See hook_menu for this...
+      'wrapper' => 'table_' . $delta,
+      'name' => 'submit',
+      'progress' => array('type' => 'throbber', 'message' => t('Please wait...')),
+      'method' =>  'replace',
+      'effect' =>  'fade'
+     ), 
+  );
+  
+  $table = theme('ogdi_field_container', array('ogdi' => $variables['ogdi'], 'headers' => $variables['headers'], 'rows' => $variables['rows'], 'parameters' => $variables['parameters'], 'delta' => $delta));
+  
+  $form['table_map_'. $delta] = array(
+    '#type' => 'markup',
+    '#prefix' => '<div id="table_'. $delta . '">',
+    '#suffix' => '</div>',
+    '#markup' => $table,
+  );
+  
+  return $form;
+} 
+
+
+/**
+ * Function to retrieve and build data when filter is run.
+ *
+ * @see ogdi_field_filter_form().
+ */
+function ogdi_field_filter_callback($form, $form_state) {
+  $delta = filter_xss($form['query']['delta']['#value']);
+  $datasource = filter_xss($form['query']['datasource']['#value']);
+  $dataset_id = filter_xss($form['query']['dataset_id']['#value']);
+
+  $filter = $form['query']['filter']['#value'];
+  
+  $parameters = array('format' => 'json', '$filter' => $filter);
+  
+  // Create a new instance of OGDI object
+  $ogdi = ogdi_field_ogdi($datasource, $dataset_id);
+
+  // Get the schema (column names) of the dataset
+  $schema = ogdi_field_get_metadata($ogdi);
+  
+  // Build the table headers from that
+  $headers = ogdi_field_build_table_headers($schema->d[0]);
+  
+  // Get the data
+  $data = ogdi_field_get_data($ogdi, $parameters);
+
+  // Build the table rows from that data
+  $rows = ogdi_field_build_table($data->d, $headers);
+  
+  $output = theme('ogdi_field_container', array('ogdi' => $ogdi, 'headers' => $headers, 'rows' => $rows, 'parameters' => $parameters, 'datasource' => $datasource, 'dataset_id' => $dataset_id, 'delta' => $delta));
+  
+  $element = $form['table_map_' . $delta];
+  $element['#markup'] = $output;
+  return $element;
+}

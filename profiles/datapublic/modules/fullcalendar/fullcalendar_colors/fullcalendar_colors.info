@@ -1,0 +1,13 @@
+name = FullCalendar Colors
+description = Allows definition of colors for fullcalendars based on taxonomies, node types, etc.
+core = 7.x
+package = "Views"
+configure = admin/config/calendar/fullcalendar/colors
+dependencies[] = fullcalendar
+
+; Information added by drupal.org packaging script on 2011-06-16
+version = "7.x-2.0-alpha6"
+core = "7.x"
+project = "fullcalendar"
+datestamp = "1308250917"
+

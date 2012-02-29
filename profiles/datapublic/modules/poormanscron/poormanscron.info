@@ -1,0 +1,13 @@
+name = Poormanscron
+description = Internal scheduler for users without a cron application.
+core = 7.x
+files[] = poormanscron.module
+files[] = poormanscron.install
+files[] = poormanscron.test
+
+; Information added by drupal.org packaging script on 2011-02-25
+version = "7.x-2.x-dev"
+core = "7.x"
+project = "poormanscron"
+datestamp = "1298619960"
+

@@ -1,0 +1,7 @@
+name = RE Block Width
+description = Allows assigning CSS classes (foundation  widths) to blocks.
+core = 7.x
+package = 'Raised Eyebrow Custom Modules'
+
+files[] = re_block_width.install
+files[] = re_block_width.module

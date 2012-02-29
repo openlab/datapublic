@@ -1,0 +1,18 @@
+name = Semantic Views
+description = Views 3 plugins for UI management of output markup
+core = 7.x
+dependencies[] = views
+package = Views
+files[] = semanticviews.module
+files[] = semanticviews_plugin_row_fields.inc
+files[] = semanticviews_plugin_style_default.inc
+files[] = semanticviews.theme.inc
+files[] = semanticviews.views_default.inc
+files[] = semanticviews.views.inc
+
+; Information added by drupal.org packaging script on 2011-02-25
+version = "7.x-1.x-dev"
+core = "7.x"
+project = "semanticviews"
+datestamp = "1298620144"
+

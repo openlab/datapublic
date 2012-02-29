@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the DataPublic Defaults feature.
+ */
+
+include_once('datapublic_defaults.features.inc');

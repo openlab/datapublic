@@ -1,0 +1,14 @@
+name = Default Content
+description = Allows Export/Import of Default Content
+core = 7.x
+package = Features
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = uuid
+
+; Information added by drupal.org packaging script on 2012-02-02
+version = "7.x-2.x-dev"
+core = "7.x"
+project = "defaultcontent"
+datestamp = "1328142037"
+

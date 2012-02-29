@@ -1,0 +1,54 @@
+/**
+ * Slideshow styles
+ *
+ * @todo
+ *  -- we need styles for different screen sizes
+ */
+
+#block-views-slideshow-block {
+  width: 100%;
+}
+
+  #block-views-slideshow-block .view-id-slideshow {
+    height: 300px;
+  }
+
+    #block-views-slideshow-block .view-id-slideshow .views-row {
+      /**
+       * This rule is only required when the 'fade' transition is used.
+       *
+       * @see https://github.com/zurb/foundation/issues/228#issuecomment-3553588
+       */
+      background: #ccc;
+      height: 300px;
+    }
+
+      #block-views-slideshow-block .view-id-slideshow .views-row .orbit-content {      
+        margin: 20px 100px;
+        /* position: relative; */
+      }
+
+        #block-views-slideshow-block .view-id-slideshow .views-row .orbit-image {
+          position: absolute;
+          z-index: -1;
+        }
+  
+        #block-views-slideshow-block .view-id-slideshow .views-row .orbit-title {
+          
+        } 
+  
+        #block-views-slideshow-block .view-id-slideshow .views-row .orbit-body {
+          
+        }
+  
+        #block-views-slideshow-block .view-id-slideshow .views-row .orbit-edit-link {
+          background: #ccc;
+          border-bottom: 2px solid #fff;
+          border-right: 2px solid #fff;
+          padding: .5em;
+          position: absolute;
+          left: 0;
+          top: 0;
+	}
+      
+      #block-views-slideshow-block .view-id-slideshow .views-row .orbit-caption {}

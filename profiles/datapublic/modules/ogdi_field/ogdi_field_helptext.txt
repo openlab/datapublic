@@ -1,0 +1,61 @@
+<p>
+    OGDI uses a subset of the <a href="http://msdn.microsoft.com/en-us/library/cc668784(VS.100).aspx">
+        WCF Data Services query syntax</a>. The basic format
+    of a filter expression is <i>property</i>&nbsp;<i>comparison</i>&nbsp;<i>expression</i>,
+    where <i>property</i> is the name of a property, <i>comparison</i> is a comparison
+    operator, and <i>expression</i> is the expression with which the property's
+    value should be compared.
+</p>
+<p>
+    Some examples of filter expressions using the CrimeIncidents data set from the DC
+    container are:</p>
+<table width="100%">
+    <tbody><tr>
+        <td style="vertical-align: top;">
+            method eq 2
+        </td>
+        <td style="vertical-align: top;">
+            <p>
+                Crime incidents where the method code is equal to 2. Other comparison operators
+                include "gt" for greater than, "lt" for less than, "ge"
+                for greater than or equal to, and "le" for less than or equal to.</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top;">
+            shift eq 'EVN'
+        </td>
+        <td style="vertical-align: top;">
+            <p>
+                Crime incidents where the "shift" property is equal to "EVN".
+                String literals must be enclosed in single quotes. Boolean literals are represented
+                as "true" or "false" (without the double quotes).</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top;">
+            reportdatetime ge datetime'2008-06-01T00:00:00Z'
+        </td>
+        <td style="vertical-align: top;">
+            <p>
+                Crime incidents where the report date/time is on or after midnight, June 1, 2008,
+                UTC. Date/time literals are expressed in <a target="_blank" href="http://en.wikipedia.org/wiki/ISO_8601">ISO 8601</a>
+                format, <i>yyyy</i>-<i>mm</i>-<i>dd</i>T<i>HH</i>:<i>MM</i>:<i>SS</i>, where <i>yyyy</i>
+                is the four-digit year, <i>mm</i> is the two-digit month number, <i>dd</i> is the
+                two-digit day of the month, <i>HH</i> is the two-digit hour (in 24-hour format),
+                <i>MM</i> is the two-digit minute, and <i>SS</i> is the two-digit second.</p>
+        </td>
+    </tr>
+    <tr>
+        <td style="vertical-align: top;">
+            (shift eq 'EVN') or (shift eq 'MID')
+        </td>
+        <td style="vertical-align: top;">
+            <p>
+                Crime incidents where the shift is equal to "EVN;" or "MID".
+                The filter syntax supports the "and", "or", and "not"
+                logical operators. Expressions can grouped with parentheses, as in many popular
+                programming languages.</p>
+        </td>
+    </tr>
+</tbody></table>

@@ -1,0 +1,7 @@
+name = 'RE Orbit'
+description = 'Provides the Foundation Orbit javascript library and styles to the RE Context Libraries module.'
+package = 'Raised Eyebrow Custom Modules'
+dependencies[] = re_contextlibraries
+core = 7.x
+php = 5.2
+version = 7.x-1.3

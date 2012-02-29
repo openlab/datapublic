@@ -1,0 +1,5 @@
+name = RE Silverlight Maps
+description = "Provides the maps from Bhangra.ne"
+package = 'Raised Eyebrow Custom Modules'
+core = 7.x
+

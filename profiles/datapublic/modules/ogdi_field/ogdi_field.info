@@ -1,0 +1,9 @@
+; $Id$
+name = OGDI Field
+description = Defines a link field formatter for displaying an OGDI dataset in a node
+dependencies[] = field
+dependencies[] = link
+dependencies[] = jquery_update
+package = CCK
+core = 7.x
+php = 5.1

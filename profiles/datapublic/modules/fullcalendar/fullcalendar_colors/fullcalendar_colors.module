@@ -1,0 +1,148 @@
+<?php
+
+/**
+ * Implements hook_menu().
+ */
+function fullcalendar_colors_menu() {
+  $items = array();
+  $path = drupal_get_path('module', 'fullcalendar_colors') . '/includes';
+
+  $items['admin/config/calendar/fullcalendar/colors'] = array(
+    'title' => 'Colors',
+    'description' => 'Adjust FullCalendar color settings for entities.',
+    'file' => 'fullcalendar_colors.admin.inc',
+    'file path' => $path,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('fullcalendar_admin_color_node_type_settings'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => 1,
+  );
+
+  $items['admin/config/calendar/fullcalendar/colors/node'] = array(
+    'title' => 'Node Type',
+    'file' => 'fullcalendar_colors.admin.inc',
+    'file path' => $path,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('fullcalendar_admin_color_node_type_settings'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_DEFAULT_LOCAL_TASK,
+    'weight' => -10,
+  );
+
+  if (module_exists('taxonomy')) {
+    $items['admin/config/calendar/fullcalendar/colors/taxonomy'] = array(
+      'title' => 'Taxonomy',
+      'file' => 'fullcalendar_colors.admin.inc',
+      'file path' => $path,
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('fullcalendar_admin_color_taxonomy_settings'),
+      'access arguments' => array('administer site configuration'),
+      'type' => MENU_LOCAL_TASK,
+      'weight' => -8,
+    );
+  }
+
+  $items['admin/config/calendar/fullcalendar/colors/user'] = array(
+    'title' => 'User Role',
+    'file' => 'fullcalendar_colors.admin.inc',
+    'file path' => $path,
+    'page callback' => 'drupal_get_form',
+    'page arguments' => array('fullcalendar_admin_color_user_role_settings'),
+    'access arguments' => array('administer site configuration'),
+    'type' => MENU_LOCAL_TASK,
+    'weight' => -6,
+  );
+
+  if (module_exists('og')) {
+    $items['admin/config/calendar/fullcalendar/colors/og'] = array(
+      'title' => 'Organic Groups',
+      'file' => 'fullcalendar_colors.admin.inc',
+      'file path' => $path,
+      'page callback' => 'drupal_get_form',
+      'page arguments' => array('fullcalendar_admin_color_og_settings'),
+      'access arguments' => array('administer site configuration'),
+      'type' => MENU_LOCAL_TASK,
+      'weight' => -2,
+    );
+  }
+
+  return $items;
+}
+
+/**
+ * Implements hook_help().
+ */
+function fullcalendar_colors_help($path, $arg) {
+  switch ($path) {
+    case 'admin/help#fullcalendar_colors':
+      return '<p>' . t('You can configure colors for your fullcalendar events based on taxonomy terms, node types, etc. on the <a href="@link">FullCalendar Colors administration page</a>.', array('@link' => '/admin/config/calendar/fullcalendar/colors')) . '</p>';
+      break;
+  }
+}
+
+/**
+ * Implements hook_fullcalendar_classes().
+ */
+function fullcalendar_colors_fullcalendar_classes($entity) {
+  require_once './' . drupal_get_path('module', 'fullcalendar_colors') . '/includes/fullcalendar_colors.inc';
+  $classes = array();
+  $css = '';
+
+  $hook = 'fullcalendar_colors_create_css';
+  $css = array();
+  foreach (module_implements($hook) as $module) {
+    $function = $module . '_' . $hook;
+    $css[$module] = $function($classes, $entity);
+  }
+
+  fullcalendar_colors_process_css($css);
+
+  return $classes;
+}
+
+/**
+ * Builds a css string.
+ *
+ * @param $class
+ *   Classname used for the new css selectors.
+ * @param $color
+ *   The new background color.
+ */
+function _fullcalendar_colors_build_css_string($class, $color) {
+  $css = ' .' . $class . ',';
+  $css .= ' .' . $class . ' .fc-event-skin,';
+  $css .= ' .' . $class . ' .fc-event-time,';
+  $css .= ' .' . $class . ' a';
+  $css .= '{background-color: ' . $color . '; border-color: ' . $color . ';}';
+  return $css;
+}
+
+/**
+ * Processes css.
+ *
+ * @param $css
+ *   CSS that is being processed.
+ * @param $reset
+ *   Boolean to print the CSS and reset the array.
+ */
+function fullcalendar_colors_process_css($css = array(), $reset = FALSE) {
+  $fullcalendar_css = &drupal_static(__FUNCTION__, array());
+  if ($reset) {
+    $string = '';
+    foreach ($fullcalendar_css as $module => $class) {
+      foreach ($class as $class_name => $css) {
+        if (is_array($css)) {
+          $css = array_unique($css);
+          $css = reset($css);
+        }
+        $string .= $css;
+      }
+    }
+    drupal_add_css($string, 'inline');
+    drupal_static_reset('fullcalendar_colors_process_css');
+  }
+  else {
+    $fullcalendar_css = array_merge_recursive($css, $fullcalendar_css);
+  }
+}

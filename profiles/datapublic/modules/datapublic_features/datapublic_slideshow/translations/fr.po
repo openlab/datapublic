@@ -1,0 +1,39 @@
+# $Id$
+#
+# French translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-02-14 14:08-0800\n"
+"PO-Revision-Date: 2012-02-14 14:08-0800\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: French <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+#:
+msgid "Slide"
+msgstr "Diapositive"
+
+#:
+msgid "Left"
+msgstr "Gauche"
+
+#:
+msgid "Right"
+msgstr "Droite"
+
+#:
+msgid "Previous"
+msgstr "Précédent"
+
+#:
+msgid "Next"
+msgstr "Suivant"

@@ -1,0 +1,199 @@
+FullCalendar 7.x-2.x, xxxx-xx-xx
+--------------------------------
+#1180936 by amateescu: Allow drush to download latest version without breaking minimum version.
+#1189274 by aspilicious: Delete variables with db_delete instead of db_query.
+#1177126 by tim.plunkett: Fixed problems leading to the Default Date not loading.
+#1176594 by aspilicious: Fixed disabling of node type and user role colors.
+#1168398 by rooby, aspilicious, tim.plunkett: Update the README.txt file for Drupal 7 Views.
+#921572 by tim.plunkett: Added ability to pass date argument from view to display specific month.
+#1145016 by tim.plunkett: Clean-up addition of CSS and JS.
+
+FullCalendar 7.x-2.0-alpha5, 2011-04-28
+---------------------------------------
+#1138516 by tim.plunkett: Check fully loaded options, not just altered options.
+#1139192 by tim.plunkett: Initialize arrays before usage.
+#1138612 by aspilicious: Fixed coding standards for Fullcalendar Colors.
+#1137218 by tim.plunkett: Let empty handler set dom id and display Google Calendar events.
+#1137660 by aspilicious: Fixed fullcalendar_colors_uninstall().
+
+FullCalendar 7.x-2.0-alpha4, 2011-04-23
+---------------------------------------
+#1041068 by geerlingguy, aspilicious, tim.plunkett: Added Colorpicker similar to Calendar module.
+#1134302 by aspilicious: Make CSS less specific.
+#1133486 by aspilicious: Hide fallback with CSS if JS is enabled.
+#1132472 by tim.plunkett: Allow changing Time display in Month View.
+#1081488 by tim.plunkett: Fix calculation of the views dom id.
+#1131028 by tim.plunkett: Add API documentation.
+#1131028 by aspilicious, tim.plunkett: Replace theme_fullcalendar_classname with hook and alter.
+#1130950 by tim.plunkett: Fix strict OO compatibility for fullcalendar_handler_area_empty::render().
+#1003602 by tim.plunkett: Follow-up with renaming fullcalendar_handler_area_empty.
+#1125264 by aspilicious, tim.plunkett: Improved compatibility with new Views UI.
+#1124882 by tim.plunkett: Fixed notices caused by Google Calendar options.
+#1050530 by aspilcious: Window layout fix.
+#1041068 by geerlingguy: Add default menu item to help sub-modules.
+
+FullCalendar 7.x-2.0-alpha3, 2011-03-15
+---------------------------------------
+#1003602 by tim.plunkett: Rename and reorganize files.
+#1063714 by tim.plunkett: Fix error when checking for editable.
+#1062656 by tim.plunkett: Remove usage of entity_id_N.
+#981522 follow-up by aspilicious: Removed hacks from Google Calendar integration.
+#1061546 by tim.plunkett: Support using only Google Calendar.
+
+FullCalendar 7.x-2.0-alpha2, 2011-02-13
+---------------------------------------
+#1033010 follow-up by tim.plunkett: Provide a default view as an example.
+#1049080 follow-up by tim.plunkett: Support non-Field API fields and relationships.
+#1045114 by aspilicious: Cleaned up interface strings.
+#1055978 by tim.plunkett: Support multiple calendars per page.
+#1057156 by aspilicious: Hide row style date fields until date fields are added.
+#981522 by aspilicious, tim.plunkett, xjolanx007: Added Google Calendar integration.
+#1049080 by tim.plunkett: Support non-Field API fields and relationships.
+#1050530 by aspilicious: Added customizable window target.
+#1049028 by tim.plunkett: Removed theme_fullcalendar_link().
+#1047962 follow-up by tim.plunkett: Re-add custom display plugin for upgrade path and future features.
+#1043222 follow-up by proffy, tim.plunkett: Fix resize AJAX.
+#1047962 by tim.plunkett: Deprecate custom display plugin in favor of custom empty text.
+#1043222 by aspilicious, tim.plunkett, proffy: Remove node-specific code in favor of entities.
+
+FullCalendar 7.x-2.0-alpha1, 2011-01-31
+---------------------------------------
+#1044426 by aspilicious: Added RTL support.
+#1043222 by aspilicious, tim.plunkett: Removed the node (load) dependency.
+#910494 by aspilicious: Colorbox custom settings.
+#1036444 follow-up by aspilicious: Correct option names for Views UI overhaul.
+#1036444 by aspilicious, tim.plunkett: Overhauled the Views UI.
+
+FullCalendar 7.x-1.x, xxxx-xx-xx
+--------------------------------
+
+FullCalendar 7.x-1.4, 2011-01-31
+--------------------------------
+#1040596 by aspilicious: Fixed error on calendar page.
+#1038822 by wildpoppy: Fixed extra closing H3 tag.
+#1038442 by aspilicious: JS clean-up.
+#1039912 by tim.plunkett: Fixed FullCalendar doubling on page.
+#1011696 by aspilicious: Fixed drag-and-drop for subdomains.
+#980180 follow-up by aspilicious: Extra trailing comma breaks fullcalendar in IE 7 & IE 6.
+
+FullCalendar 7.x-1.3, 2011-01-22
+--------------------------------
+#1033110 by tim.plunkett | geerlingguy: Added link to configuration page.
+#1033858 by aspilicious: Added translation support.
+
+FullCalendar 7.x-1.2, 2011-01-19
+--------------------------------
+#1033010 by tim.plunkett: Provide a default view as an example.
+#1032980 by tim.plunkett, aspilicious: Improved default styling for Bartik.
+#1013456 by tim.plunkett: Documentation clean-up.
+#1031924 by tim.plunkett | Jody Lynn: Fixed call to deprecated Drupal.parseJson.
+#980886 follow-up by tim.plunkett: Add call to new fullcalendar.custom.css.
+#980810 by tim.plunkett: Added option to use fullcalendar.min.js.
+#980886 by aspilicious, tim.plunkett: Move FullCalendar plugin out of module into sites/all/libraries.
+#933622 by tim.plunkett: Port drag-and-drop to Drupal 7.
+#933622 by tim.plunkett: Port to Drupal 7.
+
+FullCalendar 6.x-2.x, xxxx-xx-xx
+--------------------------------
+#1076576 by tim.plunkett: Prevent repeating dates from being edited on the calendar.
+#1150336 by arrrgh: Declare Views 6.x-3.x dependency in README.txt.
+#1076576 by tim.plunkett: Added support for repeating dates.
+#1137218 by tim.plunkett: Let empty handler set dom id and display Google Calendar events.
+#1137234 by tim.plunkett: Hide views options if not needed.
+#1033010 by tim.plunkett: Provide a default view as an example.
+#1133316 by tim.plunkett: Fixed row style options.
+
+FullCalendar 6.x-2.0-alpha1, 2011-04-24
+---------------------------------------
+#981522 by tim.plunkett: Added Google Calendar integration.
+#1134302 by aspilicious: Make CSS less specific.
+#1133486 by aspilicious: Hide fallback with CSS if JS is enabled.
+#1132472 by tim.plunkett: Allow changing Time display in Month View.
+#1130956 by tim.plunkett: Re-add support for timestamps.
+#1131028 by aspilicious, tim.plunkett: Replace theme_fullcalendar_classname with hook and alter.
+#1081488 by tim.plunkett: Fix calculation of the views dom id.
+#1047962 by tim.plunkett: Use new area handler for empty calendars.
+#1003602 by tim.plunkett: Rename views plugins and reorganize files.
+#1123398 by tim.plunkett: Add JS/CSS only when needed.
+#1050530 by aspilicious: Added target window.
+#1045114 by aspilicious: Improved UI strings.
+#910494 by aspilicious: Improved Colorbox support.
+#1044426 by aspilicious: Added RTL support.
+#1055978 by tim.plunket: Cleanup for multiple calendars fix.
+#1055978 by aspilicious: Fix multiple calendars per page.
+#1036444 by aspilicious, tim.plunkett: Backport fields row style from D7.
+#1032980 by aspilicious: Improved default styling for fullcalendar.
+#1035246 by aspilicious: Fixed incompatiblity with Views 6.x-3.x.
+#1038822 by wildpoppy: Fixed extra closing H3 tag.
+#1038442 by aspilicious: JS clean-up.
+#1039912 by tim.plunkett: Fixed FullCalendar doubling on page.
+#1011696 by aspilicious: Fixed drag-and-drop for subdomains.
+#980180 follow-up by aspilicious: Extra trailing comma breaks fullcalendar in IE 7 & IE 6.
+#1033858 by aspilicious: Added translation support.
+by tim.plunkett: Updated CHANGELOG.txt.
+
+FullCalendar 6.x-1.x, xxxx-xx-xx
+--------------------------------
+
+FullCalendar 6.x-1.4, 2011-04-24
+--------------------------------
+#1038822 by wildpoppy: Fixed extra closing H3 tag.
+#1038442 by aspilicious: JS clean-up.
+#1039912 by tim.plunkett: Fixed FullCalendar doubling on page.
+#1011696 by aspilicious: Fixed drag-and-drop for subdomains.
+#980180 follow-up by aspilicious: Extra trailing comma breaks fullcalendar in IE 7 & IE 6.
+#1033858 by aspilicious: Added translation support.
+
+FullCalendar 6.x-1.3, 2011-01-05
+--------------------------------
+#1016466 by tim.plunkett: Fix call to undefined function fullcalendar_get_path().
+
+FullCalendar 6.x-1.2, 2011-01-05
+--------------------------------
+#1013456 by aspilicious, tim.plunkett: Documentation clean-up.
+
+FullCalendar 6.x-1.2-rc1, 2010-12-30
+------------------------------------
+#984438 by tim.plunkett: Final coding clean-up before RC1.
+#980810 by tim.plunkett | geerlingguy: Added option to use fullcalendar.min.js.
+#980886 by tim.plunkett, jwhat: Move FullCalendar plugin out of module into sites/all/libraries.
+by tim.plunkett: Added CHANGELOG.txt.
+
+FullCalendar 6.x-1.2-beta6, 2010-12-20
+--------------------------------------
+#980180 by geerlingguy: Extra trailing comma breaks fullcalendar in IE 7 & IE 6.
+#906112 by jwhat, tim.plunkett, geerlingguy: Added handle drag and drop: creating events, rescheduling events.
+#910546 by tim.plunkett, bjalford: Fixed support for weekMode.
+#984438 by tim.plunkett: Coding style clean-up.
+#918144 by obrienmd, geerlingguy, Gaara: Documented repeating events support.
+#917988 by tim.plunkett: Added Views options additions and clean-up.
+#992812 by tim.plunkett: Fixed Date field discovery code fails on edge cases.
+#1001688 by tim.plunkett: Moved jQuery out of template file.
+#926344 by tim.plunkett: Added support for overriding event title with an arbitrary field.
+
+FullCalendar 6.x-1.2-beta5, 2010-11-13
+--------------------------------------
+by ablondeau: Attempting to sync head to 6.x-1.0 branch so that snapshots will work.
+
+FullCalendar 6.x-1.2-beta4, 2010-11-11
+--------------------------------------
+#906232 by tim.plunkett: The date module does all it's timezone handling internally and occasionally in the theme layer, so it had to be replicated, instead of reused.
+#910510 by tim.plunkett: CSS changes and addition of a theme function to generate class name for events.
+#932854 by tim.plunkett: Add check for datestamp fields.
+#962474 by tim.plunkett: Add additional fields to view style config for default year, month, day and time format.
+
+FullCalendar 6.x-1.0-beta3, 2010-09-13
+--------------------------------------
+#905746 by ablondeau: passing times through date's date_formatter_process function.
+#910510 by ablondeau: added code to set class based on node type.
+#910546 by bjalford: added week mode.
+
+FullCalendar 6.x-1.0-beta2, 2010-09-13
+--------------------------------------
+#906062 by ablondeau: added agendaDay to defaults, added ability to set header options.
+#906018 by ablondeau: raw events only hidden when js calendar is shown.
+#906232 by ablondeau: date fields that do not have an hour as part of their granularity are flagged as allDay.
+
+FullCalendar 6.x-1.0-beta1, 2010-09-08
+--------------------------------------
+Initial release of fullcalendar module.

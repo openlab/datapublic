@@ -1,0 +1,49 @@
+# $Id$
+#
+# LANGUAGE translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-02-14 14:08-0800\n"
+"PO-Revision-Date: YYYY-mm-DD HH:MM+ZZZZ\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: LANGUAGE <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=INTEGER; plural=EXPRESSION;\n"
+
+# Photo Gallery/Photo Galleries not set up as plural because this module doesn't provide
+# any instances where e.g. 0 Photo Galleries/1 Photo Gallery/2 Photo Galleries occurs.
+#:
+msgid "Photo Gallery"
+msgstr ""
+
+#:
+msgid "Photo Galleries"
+msgstr ""
+
+#:
+msgid "Media Room"
+msgstr ""
+
+#:
+msgid "Left"
+msgstr ""
+
+#:
+msgid "Previous"
+msgstr ""
+
+#:
+msgid "Right"
+msgstr ""
+
+#:
+msgid "Next"
+msgstr ""

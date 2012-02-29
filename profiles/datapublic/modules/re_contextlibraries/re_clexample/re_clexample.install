@@ -1,0 +1,25 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * Performs any 'first run' or 'last run' operations necessary for the module.
+ * In this case, sets Drupal variables required to use the module on install,
+ * removes them on uninstall.
+ */
+
+
+/**
+ * Implements hook_install().
+ */
+function re_clexample_install() {
+  $library = module_invoke('re_clexample', 'define_re_contextlibraries_library');
+} // re_clexample_install()
+
+
+/**
+ * Implements hook_uninstall().
+ */
+function re_clexample_uninstall() {
+  // Nothing to do...
+} // re_clexample_uninstall()

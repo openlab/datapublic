@@ -1,0 +1,15 @@
+;$Id$
+
+name = 'RE CL Example'
+description = 'Provides the CL Example javascript library and styles to the RE Context Libraries module.'
+package = 'Raised Eyebrow Custom Modules'
+dependencies[] = re_contextlibraries
+core = 7.x
+php = 5.2
+version = 7.x-1.0
+; Information added by drupal.org packaging script on 2011-09-22
+version = "7.x-2.0"
+core = "7.x"
+project = "re_contextlibraries"
+datestamp = "1316734309"
+

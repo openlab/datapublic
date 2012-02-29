@@ -1,0 +1,8 @@
+<?php
+/**
+ * @file
+ * Code for the datapublic_videos feature.
+ */
+
+include_once('datapublic_videos.features.inc');
+include_once('datapublic_videos.theme.inc');

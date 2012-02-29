@@ -1,0 +1,46 @@
+<?php
+/**
+ * @file
+ * Install, update, and uninstall functions for the field_example module.
+ */
+
+/**
+ * Implements hook_field_schema().
+ *
+ * Defines the database schema of the field, using the format used by the
+ * Schema API.
+ *
+ * The data we will store here is just one 255-character elemen
+ *
+ * @see http://drupal.org/node/146939
+ * @see schemaapi
+ * @see hook_field_schema()
+ * @ingroup field_example
+ */
+function ogdi_field_field_schema($field) {
+  module_load_include('inc', 'ogdi_field', 'ogdi_field.markers');
+  $columns = array(
+    'url' => array(
+      'type' => 'varchar',
+      'length' => 2047,
+      'not null' => TRUE
+    ),
+  );
+
+  foreach (ogdi_field_markers() as $marker=>$field) {
+    $columns[$marker] = array(
+      'type' => 'varchar',
+      'length' => 255,
+      'not null' => FALSE,
+    );
+  }
+  
+  $indexes = array(
+    'url' => array('url'),
+  );
+
+  return array(
+    'columns' => $columns,
+    'indexes' => $indexes,
+  );
+}

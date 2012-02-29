@@ -1,0 +1,138 @@
+<?php
+// $Id$
+
+/**
+ * @file
+ * This file provides context plugins, logic, and standard hook implementations
+ * for the re_contextlibraries module.
+ *
+ * @author Christopher Torgalson <chris@raisedeyebrow.com>
+ */
+
+
+/**
+ * Implements hook_context_plugins().
+ */
+function re_contextlibraries_context_plugins() {
+  $plugins = array();
+  $plugins['context_reaction_re_contextlibraries_includelibraries'] = array(
+    'handler' => array(
+      'path' => drupal_get_path('module', 're_contextlibraries') . '/context',
+      'file' => 'context_reaction_re_contextlibraries_includelibraries.inc',
+      'class' => 'context_reaction_re_contextlibraries_includelibraries',
+      'parent' => 'context_reaction',
+    ),
+  );
+  return $plugins;
+} // re_contextlibraries_context_plugins()
+
+
+/**
+ * Implements hook_context_registry().
+ */
+function re_contextlibraries_context_registry() {
+  return array(
+    'reactions' => array(
+      'includelibraries' => array(
+        'title' => t('Include libraries'),
+        'description' => t('Include description of library inclusion here'),
+        'plugin' => 'context_reaction_re_contextlibraries_includelibraries',
+      ),
+    ),
+  );
+} // re_contextlibraries_context_registry()
+
+
+/**
+ * Implements hook_define_re_contextlibraries_library().
+ */
+function re_contextlibraries_define_re_contextlibraries_library() {
+  return array('re_contextlibraries' . ':' . 're_contextlibraries' => t('RE Context Libraries Utilities (provided by re_contextlibraries)'));
+} // re_jquerycycle_define_re_contextlibraries_library()
+
+
+/**
+ * Implements hook_help().
+ */
+function re_contextlibraries_help($path, $arg) {
+  $path_to_module = drupal_get_path('module', 're_contextlibraries');
+  switch ($path) {
+    case 'admin/help#re_contextlibraries':
+      $output = '<p>' . t("The RE Context Libraries module provides javascript libraries for use in the Contexts. The main module can be extended by creating very small library modules that provide additional javascript tools. For information about adding library modules for use with RE Context Libraries, please consult the module's !readme-file.", array('!readme-file' => l('README file', $path_to_module . '/README.txt'))) . '</p>';
+      break;
+    default:
+      $output = NULL;
+  }
+  return $output;
+} // re_contextlibraries_help()
+
+
+/**
+ * Implements hook_library().
+ *
+ * Used to register libraries with the system.
+ */
+function re_contextlibraries_library() {
+  $path_to_module = drupal_get_path('module', 're_contextlibraries');
+  $libraries['re_contextlibraries'] = array(
+    'title' => 'RE Context Libraries (provided by: re_contextlibraries)',
+    'website' => 'http://www.raisedeyebrow.com/',
+    'version' => '7.x-1.1',
+    'js' => array(
+      $path_to_module . '/js/re_contextlibraries.js' => array(
+        'group' => JS_LIBRARY,
+        'weight' => 2,
+      ),
+    ),
+  );
+  return $libraries;
+} // re_contextlibraries_library()
+
+
+/**
+ * Load all the necessary files to allow us to play slides.
+ *
+ * @param array $library_settings The array of library settings for this context
+ * @param object $context The current context
+ */
+function re_contextlibraries_load_resources($library_settings, $context) {
+  foreach ($library_settings['library_name'] as $library) {
+    // Break the incoming value apart into module and library names:
+    $library_details = explode(':', $library);
+    $module = $library_details[0];
+    $library = $library_details[1];
+    $library_added = drupal_add_library($module, $library);
+  }
+} // re_contextlibraries_load_resources()
+
+
+/**
+ * Implements hook_preprocess_page().
+ *
+ * Normally, we would expect to run this function on e.g. hook_init(), but it
+ * seems as though the init hook is called too early in the page rendering
+ * function for Drupal when it's (implicitly) calling context_active_contexts().
+ *
+ * @see http://api.lullabot.com/context_active_contexts
+ */
+function re_contextlibraries_preprocess_page(&$variables) {
+  // Find out what reactions are available (if any), and execute 'em:
+  if ($plugin = context_get_plugin('reaction', 'includelibraries')) {
+    $plugin->execute();
+  }
+} // recontextlibraries_preprocess_page()
+
+
+
+/**
+ * Registers available libraries provided by other modules.
+ *
+ * @return array Array suitable for use in #options in Forms API. Keys are
+ *               module_name:library_name and values are 'Human Readable library
+ *               Name'. These values correspond to those defined in hook_library()
+ * @see http://api.drupal.org/api/drupal/modules--system--system.api.php/function/hook_library/7
+ */
+function re_contextlibraries_register_libraries() {
+  // Find out about all the libraries available:
+  return module_invoke_all('define_re_contextlibraries_library');
+} // re_contextlibraries_register_library()

@@ -1,0 +1,88 @@
+<?php
+
+/**
+ * @file
+ * Install, update and uninstall functions for the block_width module.
+ */
+
+
+/**
+ * @todo Please document this function.
+ * @see http://drupal.org/node/1354
+ */
+function re_block_width_schema() {
+  $schema['block_width'] = array(
+    'fields' => array(
+      'module' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'The module to which the block belongs.',
+      ),
+      'delta' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+        'description' => "The ID of the module's block.",
+      ),
+      'css_class' => array(
+        'type' => 'varchar',
+        'length' => '255',
+        'not null' => TRUE,
+        'default' => '',
+        'description' => 'String containing the classes widths for the block.',
+      ),
+    ),
+    'primary key' => array(array('module', 128), array('delta', 128)),
+  );
+
+  return $schema;
+}
+
+
+/**
+ * Implementation of hook_update_N(). Alters the structure of the
+ * block_width schema.
+ */
+function re_block_width_update_7100(&$sandbox) {
+  // Update the schema.
+  db_drop_primary_key('block_width');
+
+  db_change_field('block_width', 'module', 'module',
+    array(
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => TRUE,
+      'default' => '',
+      'description' => t('The module to which the block belongs.'),
+    )
+  );
+
+  db_change_field('block_width', 'delta', 'delta',
+    array(
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => TRUE,
+      'default' => '',
+      'description' => t("The ID of the module's block."),
+    )
+  );
+
+  db_change_field('block_width', 'css_class', 'css_class',
+    array(
+      'type' => 'varchar',
+      'length' => '255',
+      'not null' => TRUE,
+      'default' => '',
+      'description' => t('String containing the classes for the block.'),
+    )
+  );
+
+  // Restore the primary key.
+  db_add_primary_key('block_width', array(array('module', 128), array('delta',128)));
+
+  return $status;
+}
+

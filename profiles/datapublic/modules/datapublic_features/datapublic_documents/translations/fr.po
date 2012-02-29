@@ -1,0 +1,49 @@
+# $Id$
+#
+# French translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-02-14 14:08-0800\n"
+"PO-Revision-Date: 2012-02-14 14:08-0800\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: French <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+# Document/Documents not set up as plural because this module doesn't provide
+# any instances where e.g. 0 Documents/1 Document/2 Documents occurs.
+#:
+msgid "Document"
+msgstr "Document"
+
+#:
+msgid "Documents"
+msgstr "Documents"
+
+#:
+msgid "Title"
+msgstr "Titre"
+
+#:
+msgid "Last Updated"
+msgstr "Dernière mise à jour"
+
+#:
+msgid "Created"
+msgstr "Créer"
+
+#:
+msgid "Download Now"
+msgstr "Télécharger Maintenant"
+
+#:
+msgid "More Documents..."
+msgstr "Plus de Documents..."

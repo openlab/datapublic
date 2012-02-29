@@ -1,0 +1,100 @@
+<?php
+/**
+ * @file
+ * Provides the silverlight map shown on Bhangra.mex
+ * Libraries module.
+ */
+/*
+silverlight_map_block.tpl
+views-view-row-rss--silverlight-map.tpl.php
+*/
+
+/**
+* Implements hook_theme_registry_alter().
+*
+* We use a few custom .tpl files and this is how we tell
+* drupal to use them
+*     re_silverlight_map_theme
+*/ 
+
+
+function re_silverlight_map_theme(&$theme_registry) {
+
+  $template_path = drupal_get_path('module', 're_silverlight_map') . "/theme";
+  $items['block__re_silverlight_map'] = $theme_registry['block'];
+  $items['block__re_silverlight_map']['path'] = $template_path;
+  $items['block__re_silverlight_map']['template'] = 'block--re_silverlight_map';
+  
+  return $items;
+}
+
+/**
+ * Implementation of hook_block_info().
+ */
+function re_silverlight_map_block_info() {
+  $blocks['re-silverlight-map-pages-block'] = array(
+    'info' => t('Silverlight Map Pages'),
+  );
+  $blocks['re-silverlight-map-events-block'] = array(
+    'info' => t('Silverlight Map Events'),
+  );
+  return $blocks;
+}
+
+/**
+ * Implementation of hook_block_view().
+ */
+function re_silverlight_map_block_view($delta='') {
+  $block = array();
+  switch ($delta) {
+    case 're-silverlight-map-pages-block':
+      $block['subject'] = t('Block Name');
+      $block['content'] = "yo";
+      break;
+    case 're-silverlight-map-events-block':
+      $block['subject'] = t('Block Name');
+      $block['content'] = "yo";
+      break;
+  }
+  return $block;
+}
+
+function re_silverlight_map_preprocess_block(&$variables){
+
+  if ($variables['block']->module == 're_silverlight_map'){
+    switch ($variables['block']->delta) {
+      case 're-silverlight-map-pages-block':
+        $variables['map_feed'] = "feed/page";
+        break;
+      case 're-silverlight-map-events-block':
+        $variables['map_feed'] = "feed/event";
+        break;
+    }
+  }
+}
+
+
+
+function theme_georss_point($lat, $lon, $format) {
+  $output = array();
+  switch ($format) {
+    case 'gml':
+      $output['key'] = 'georss:where';
+      $output['namespace'] = array(
+        'xmlns:georss' => 'http://www.georss.org/georss',
+        'xmlns:gml' => 'http://www.opengis.net/gml'
+      );
+      $output['value'] = array(
+        'gml:Point' => array(
+          'gml:pos' => "$lat $lon"
+        ),
+      );
+      break;
+    case 'simple':
+      $output['key'] = 'georss:point';
+      $output['namespace'] = array('xmlns:georss' => 'http://www.georss.org/georss');
+      $output['value'] = "$lat $lon";
+    break;
+  }
+  return $output;
+}

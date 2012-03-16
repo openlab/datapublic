@@ -143,7 +143,7 @@ function datapublic_videos_views_default_views() {
   $handler = $view->new_display('block', 'Block: Media Room Page', 'block');
   $handler->display->display_options['defaults']['use_more'] = FALSE;
   $handler->display->display_options['use_more'] = TRUE;
-  $handler->display->display_options['use_more_text'] = 'More videos...';
+  $handler->display->display_options['use_more_text'] = 'more';
   $handler->display->display_options['defaults']['pager'] = FALSE;
   $handler->display->display_options['pager']['type'] = 'some';
   $handler->display->display_options['pager']['options']['items_per_page'] = '2';

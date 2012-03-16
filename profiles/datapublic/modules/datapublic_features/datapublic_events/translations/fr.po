@@ -1,0 +1,63 @@
+# $Id$
+#
+# French translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-02-14 14:08-0800\n"
+"PO-Revision-Date: 2012-02-14 14:08-0800\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: French <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+# Event/Events not set up as plural because this module doesn't provide
+# any instances where e.g. 0 Events/1 Event/2 Events occurs.
+#:
+msgid "Event"
+msgstr "Événement"
+
+#:
+msgid "Events / Event"
+msgstr "Événements / Événement"
+
+#:
+msgid "Archive by date"
+msgstr "Archives par date"
+
+#:
+msgid "Events"
+msgstr "Événements"
+
+#:
+msgid "Events in January, 2012"
+msgstr "Événements en Janvier 2012"
+
+#:
+msgid "Events Calendar"
+msgstr "Calendrier des Événements"
+
+#:
+msgid "Past Events"
+msgstr "Événements passés"
+
+#:
+msgid "Map (click to open)"
+msgstr "Carte (cliquez pour ouvrir)"
+
+
+
+
+
+
+
+
+
+

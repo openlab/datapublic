@@ -92,7 +92,7 @@
   <div class="submitted"><?php print t('Last Updated @date', array('@date' => format_date($node->changed))); ?></div>
 
   <div class="content"<?php print $content_attributes; ?>>
-    <div class="row">
+    <div id="document-download-btn" class="row">
       <div class="nice large radius white button">
         <?php print $document_download_link; ?>
         <br />

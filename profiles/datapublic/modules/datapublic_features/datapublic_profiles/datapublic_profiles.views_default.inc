@@ -24,7 +24,7 @@ function datapublic_profiles_views_default_views() {
   $handler = $view->new_display('default', 'Defaults', 'default');
   $handler->display->display_options['title'] = 'Staff Directory';
   $handler->display->display_options['css_class'] = 'staff-page';
-  $handler->display->display_options['use_more_text'] = 'More Leadership';
+  $handler->display->display_options['use_more_text'] = 'more';
   $handler->display->display_options['access']['type'] = 'none';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';

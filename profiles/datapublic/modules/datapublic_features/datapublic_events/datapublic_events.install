@@ -1,0 +1,38 @@
+<?php
+/**
+ * Implements hook_install()
+ */
+
+function datapublic_events_install() {
+  /** 
+   * Exportables is not yet implemented in the Alpha1 version of custom_breadcrumbs
+   * So we're going to write directly to the database on install
+   **/
+  // Create a new node object
+  $node = new stdClass();
+  // Add the type
+  $node->type = 'event';
+  // Check if custom breadcrumbs is installed and that a breadcrumb doesn't exist for the type
+  if (function_exists('custom_breadcrumbs_save_breadcrumb') && !_custom_breadcrumbs_load_for_type($node)) {    
+    $breadcrumb->paths = array('events','<none>');
+    $breadcrumb->titles = array('Events','[node:title]');
+    $breadcrumb->node_type = 'event';
+    $breadcrumb->visibility_php = NULL;
+    custom_breadcrumbs_save_breadcrumb($breadcrumb);
+  }
+}
+
+/**
+ * Implements hook uninstall()
+ */
+function datapublic_events_uninstall() {
+  // Create a new node object
+  $node = new stdClass();
+  // Add the type
+  $node->type = 'event';
+  // Check if a custom breadcrumb exists for the type, if it does, delete it
+  if($breadcrumb = _custom_breadcrumbs_load_for_type($node)) {
+      _custom_breadcrumbs_delete_breadcrumb($breadcrumb->bid);
+  }
+}
+  

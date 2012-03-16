@@ -1,0 +1,141 @@
+<?php
+/**
+ * Implements hook_enable()
+ */
+function datapublic_variables_enable() {
+  // Finally found a way to set the title on the superfish block and the region for the main content block...
+  $blocks = array(
+    array(
+      'module' => 'system',
+      'delta' => 'main',
+      'theme' => 'datapublic_theme',
+      'status' => 1,
+      'weight' => 0,
+      'region' => 'content',
+      'pages' => '',
+      'title' => '',
+      'cache' => -1,
+    ),
+    array(
+      'module' => 'superfish',
+      'delta' => '1',
+      'theme' => 'datapublic_theme',
+      'status' => 0,
+      'weight' => -9,
+      'region' => '-1',
+      'pages' => '',
+      'title' => '<none>',
+      'cache' => -1,
+    ),
+  );
+  $query = db_insert('block')->fields(array('module', 'delta', 'theme', 'status', 'weight', 'region', 'pages', 'title', 'cache'));
+  foreach ($blocks as $block) {
+    $query->values($block);
+  }
+  $query->execute();
+
+} 
+
+
+/**
+ * Implements hook_install()
+*/
+function datapublic_variables_install() {
+  // Setting all the block classes for the Foundation theme...
+  if(module_exists('re_block_width')){
+    $block_data[] = array(
+      'module' => 'block',
+      'delta' => '3',
+      'css_class' => 'four',
+    );
+    $block_data[] = array(
+      'module' => 'block',
+      'delta' => '4',
+      'css_class' => 'four',
+    );
+    $block_data[] = array(
+      'module' => 'views',
+      'delta' => 'new_tweets-block',
+      'css_class' => 'four',
+    );
+    $block_data[] = array(
+      'module' => 'follow',
+      'delta' => 'site',
+      'css_class' => 'four',
+    );
+    $block_data[] = array(
+      'module' => 'statistics',
+      'delta' => 'popular',
+      'css_class' => 'four',
+    );
+    $block_data[] = array(
+      'module' => 'views',
+      'delta' => 'videos-block',
+      'css_class' => 'six',
+    );
+    $block_data[] = array(
+      'module' => 'views',
+      'delta' => 'events-block_1',
+      'css_class' => 'six',
+    );
+    $block_data[] = array(
+      'module' => 'views',
+      'delta' => 'datasets-block_2',
+      'css_class' => 'six',
+    );
+    $block_data[] = array(
+      'module' => 'views',
+      'delta' => 'documents-block_1',
+      'css_class' => 'six',
+    );
+    $block_data[] = array(
+      'module' => 'views',
+      'delta' => 'photo_gallery-block',
+      'css_class' => 'six',
+    );
+    $block_data[] = array(
+      'module' => 'views',
+      'delta' => 'press_releases-block_3',
+      'css_class' => 'six',
+    );
+    $block_data[] = array(
+      'module' => 'block',
+      'delta' => '2',
+      'css_class' => 'twelve',
+    );
+    $block_data[] = array(
+      'module' => 'views',
+      'delta' => 'services-block',
+      'css_class' => 'twelve',
+    );
+    $block_data[] = array(
+      'module' => 'system',
+      'delta' => 'help',
+      'css_class' => 'twelve',
+    );
+    $block_data[] = array(
+      'module' => 'system',
+      'delta' => 'main',
+      'css_class' => 'twelve',
+    );
+    $block_data[] = array(
+      'module' => 'superfish',
+      'delta' => '1',
+      'css_class' => 'twelve',
+    );
+    $block_data[] = array(
+      'module' => 'menu_block',
+      'delta' => '1',
+      'css_class' => 'twelve',
+    );
+    $block_data[] = array(
+      'module' => 're_silverlight_map',
+      'delta' => 're-silverlight-map-block',
+      'css_class' => 'twelve',
+    );
+    	
+    foreach ($block_data as $data) {
+      drupal_write_record('block_width', $data);
+    }
+  }		
+}																										  

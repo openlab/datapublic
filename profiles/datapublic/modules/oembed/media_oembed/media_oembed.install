@@ -6,23 +6,6 @@
  */
 
 /**
- * Implement hook_install().
- */
-function media_oembed_install() {
-  return array();
-}
-
-/**
- * Implement hook_uninstall().
- */
-function media_oembed_uninstall() {
-  foreach (media_oembed_variable_default() as $variable => $value) {
-    media_oembed_variable_del($variable);
-  }
-  return array(array('success' => TRUE, 'query' => "Deleted all variables in the Media: oEmbed namespace."));
-}
-
-/**
  * Clear style and preset caches.
  */
 function media_oembed_update_7001() {

@@ -48,6 +48,7 @@ dependencies[] = user
 
 dependencies[] = addressfield
 dependencies[] = advanced_help
+dependencies[] = boxes
 dependencies[] = captcha
 dependencies[] = image_captcha
 dependencies[] = ctools
@@ -69,9 +70,12 @@ dependencies[] = fe_block
 dependencies[] = features
 dependencies[] = field_collection
 dependencies[] = field_group
+dependencies[] = file_entity
 dependencies[] = follow
+dependencies[] = fullcalendar
 dependencies[] = geocoder
 dependencies[] = geofield
+dependencies[] = geophp
 dependencies[] = googleanalytics
 dependencies[] = i18n
 dependencies[] = i18n_block
@@ -122,31 +126,39 @@ dependencies[] = views_ui
 dependencies[] = views_json
 dependencies[] = webform
 dependencies[] = wysiwyg
-dependencies[] = xmlsitemap
-dependencies[] = xmlsitemap_engines
-dependencies[] = xmlsitemap_i18n
-dependencies[] = xmlsitemap_menu
-dependencies[] = xmlsitemap_node
 
 ; Features
 
+dependencies[] = datapublic_roles
+
+dependencies[] = re_wysiwyg_profile
+dependencies[] = re_block_width
+dependencies[] = re_silverlight_map
+dependencies[] = re_orbit
+
+dependencies[] = datapublic_page
+dependencies[] = datapublic_default_content
 dependencies[] = datapublic_blog
 dependencies[] = datapublic_datasets
-dependencies[] = datapublic_defaults
-dependencies[] = datapublic_demo
-dependencies[] = datapublic_documents
 dependencies[] = datapublic_events
-dependencies[] = datapublic_page
 dependencies[] = datapublic_photo_gallery
 dependencies[] = datapublic_press_releases
 dependencies[] = datapublic_profiles
 dependencies[] = datapublic_services
 dependencies[] = datapublic_slideshow
 dependencies[] = datapublic_videos
-dependencies[] = re_wysiwyg_profile
-dependencies[] = re_silverlight_map
-dependencies[] = re_block_width
-dependencies[] = re_orbit
+dependencies[] = datapublic_documents
+
+dependencies[] = datapublic_breadcrumbs
+dependencies[] = datapublic_menublocks
+dependencies[] = datapublic_blocks
+dependencies[] = datapublic_superfish
+dependencies[] = datapublic_contexts
+dependencies[] = datapublic_variables
+dependencies[] = datapublic_demo
+
+
+dependencies[] = datapublic_permissions
 
 ; Profile
 

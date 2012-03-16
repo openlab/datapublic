@@ -14,16 +14,17 @@ $plugin = array(
   'title' => t("Google Geocoder"),
   'description' => t('Geocodes via google geocoder'),
   'callback' => 'geocoder_google',
-  'field_types' => array('text','text_long','addressfield','text_with_summary','computed'),
+  'field_types' => array('text', 'text_long', 'addressfield', 'text_with_summary', 'computed', 'taxonomy_term_reference'),
   'field_callback' => 'geocoder_google_field',
   'settings_callback' => 'geocoder_google_form',
+  'terms_of_service' => 'http://code.google.com/apis/maps/documentation/geocoding/#Limits',
 );
 
 /**
  * Process Markup
  */
 function geocoder_google($address, $options = array()) {
-  geocoder_load_geophp();
+  geophp_load();
   
   $query = array(
     'address' => $address,
@@ -34,7 +35,7 @@ function geocoder_google($address, $options = array()) {
   $result = drupal_http_request($url);
   
   if (isset($result->error)) {
-    drupal_set_message('Error geocoding: '.$result->code.' '.$result->error,'error');
+    drupal_set_message(t('Error geocoding') . ' - ' . $result->code . ' ' . $result->error, 'error');
     return FALSE;
   }
   
@@ -55,7 +56,7 @@ function geocoder_google($address, $options = array()) {
       if (!isset($options['geometry_type']) || $options['geometry_type'] == 'point') {
         $geom = new Point($item->geometry->location->lng, $item->geometry->location->lat);
       }
-      elseif ($options['geometry_type'] == 'bounds'){
+      elseif ($options['geometry_type'] == 'bounds') {
         $points = array(
           new Point($item->geometry->bounds->southwest->lng, $item->geometry->bounds->southwest->lat),
           new Point($item->geometry->bounds->southwest->lng, $item->geometry->bounds->northeast->lat),
@@ -65,7 +66,7 @@ function geocoder_google($address, $options = array()) {
         );
         $geom = new Polygon(array(new LineString($points)));
       }
-      elseif ($options['geometry_type'] == 'viewport'){
+      elseif ($options['geometry_type'] == 'viewport') {
         $points = array(
           new Point($item->geometry->viewport->southwest->lng, $item->geometry->viewport->southwest->lat),
           new Point($item->geometry->viewport->southwest->lng, $item->geometry->viewport->northeast->lat),
@@ -102,7 +103,7 @@ function geocoder_google($address, $options = array()) {
     return $geometry;
   }
   else {
-    drupal_set_message('Error geocoding: '.$data->status,'error');
+    drupal_set_message(t('Error geocoding') . ' - ' . $data->status, 'error');
     return FALSE;
   }
 }
@@ -114,6 +115,10 @@ function geocoder_google_field($field, $field_item, $options = array()) {
   if ($field['type'] == 'addressfield') {
     $address = geocoder_widget_parse_addressfield($field_item);
     return geocoder_google($address, $options);
+  }
+  if ($field['type'] == 'taxonomy_term_reference') {
+    $term = taxonomy_term_load($field_item['tid']);
+    return geocoder_google($term->name);
   }
 }
 

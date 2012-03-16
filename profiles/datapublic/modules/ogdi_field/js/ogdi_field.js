@@ -43,7 +43,7 @@
         $('.ogdi-tabs').tabs();
         
         // Build the datagrid...
-        $('.ogdi-datagrid').not('.processed')
+        $('table.ogdi-datagrid').not('.processed')
           .each(function(i,e){
             $(this).addClass('processed');  // Handle the reloading issues by adding a process class...
           }).

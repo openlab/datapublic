@@ -90,6 +90,20 @@ function datapublic_events_strongarm() {
   $strongarm = new stdClass;
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
+  $strongarm->name = 'fullcalendar_compression_type';
+  $strongarm->value = 'min';
+  $export['fullcalendar_compression_type'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
+  $strongarm->name = 'fullcalendar_path';
+  $strongarm->value = 'profiles/datapublic/libraries/fullcalendar/fullcalendar';
+  $export['fullcalendar_path'] = $strongarm;
+
+  $strongarm = new stdClass;
+  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
+  $strongarm->api_version = 1;
   $strongarm->name = 'i18n_node_extended_event';
   $strongarm->value = '1';
   $export['i18n_node_extended_event'] = $strongarm;

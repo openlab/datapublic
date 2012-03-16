@@ -19,7 +19,7 @@ function datapublic_documents_context_default_contexts() {
   $context->conditions = array(
     'path' => array(
       'values' => array(
-        'resources/documents' => 'resources/documents',
+        'documents' => 'documents',
       ),
     ),
   );

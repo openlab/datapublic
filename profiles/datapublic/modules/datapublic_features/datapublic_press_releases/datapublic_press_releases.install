@@ -1,0 +1,39 @@
+<?php
+
+/**
+ * Implements hook_install()
+ */
+
+function datapublic_press_releases_install() {
+  /** 
+   * Exportables is not yet implemented in the Alpha1 version of custom_breadcrumbs
+   * So we're going to write directly to the database on install
+   **/
+  // Create a new node object
+  $node = new stdClass();
+  // Add the type
+  $node->type = 'press_release';
+  // Check if custom breadcrumbs is installed and that a breadcrumb doesn't exist for the type
+  if (function_exists('custom_breadcrumbs_save_breadcrumb') && !_custom_breadcrumbs_load_for_type($node)) {    
+    $breadcrumb->paths = array('media-room','press-releases','<none>');
+    $breadcrumb->titles = array('Media Room','Press Releases','[node:title]');
+    $breadcrumb->node_type = 'press_release';
+    $breadcrumb->visibility_php = NULL;
+    custom_breadcrumbs_save_breadcrumb($breadcrumb);
+  }
+}
+
+/**
+ * Implements hook uninstall()
+ */
+
+function datapublic_press_releases_uninstall() {
+  // Create a new node object
+  $node = new stdClass();
+  // Add the type
+  $node->type = 'press_release';
+  // Check if a custom breadcrumb exists for the type, if it does, delete it
+  if($breadcrumb = _custom_breadcrumbs_load_for_type($node)) {
+      _custom_breadcrumbs_delete_breadcrumb($breadcrumb->bid);
+  }
+}

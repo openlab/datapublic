@@ -79,7 +79,7 @@ function datapublic_documents_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'menu_parent_document';
-  $strongarm->value = 'main-menu:368';
+  $strongarm->value = 'main-menu:0';
   $export['menu_parent_document'] = $strongarm;
 
   $strongarm = new stdClass;

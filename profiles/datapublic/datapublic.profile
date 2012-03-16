@@ -1,21 +1,4 @@
 <?php
-/**
- * Implements hook_init
- */
-function datapublic_init() {
- $cache = cache_get("datapublic_info");
- if (isset($cache->data)) {
-   $data = $cache->data;
- }
- else {
-   $info =  drupal_parse_info_file(dirname(__file__) . '/datapublic.info');
-   $data = array("profile" => "datapublic", "profile_version" => $info['version']);
-   cache_set("datapublic_info", $data);
- }
- drupal_add_js($data, 'setting');
-
-}
-
 
 /**
  * Implements hook_install_configure_form_alter()

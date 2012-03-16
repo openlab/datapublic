@@ -53,7 +53,13 @@ function datapublic_datasets_preprocess_node($variables) {
   // If this is a dataset...
   if($variables['type'] == 'dataset') {
     // Merge the filed collection entities...
-    $field_collections = array_merge($variables['field_dataset_external'], $variables['field_dataset_upload']);
+    if($variables['field_dataset_external'] && $variables['field_dataset_upload']) {
+      $field_collections = array_merge($variables['field_dataset_external'], $variables['field_dataset_upload']);
+    } elseif ($variables['field_dataset_external'] && !$variables['field_dataset_upload']) {
+      $field_collections = $variables['field_dataset_external'];
+    } elseif (!$variables['field_dataset_external'] && $variables['field_dataset_upload']) {
+      $field_collections = $variables['field_dataset_upload'];
+    }
     // Loop through the field_collection entities...
     foreach($field_collections as $field_collection) {
       // Get each field collection id...

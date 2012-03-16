@@ -1979,7 +1979,7 @@ function datapublic_demo_content_defaults() {
   		</table>
       Vivamus pharetra elementum varius. Maecenas a rhoncus ligula. Suspendisse ut dolor in nunc vestibulum ultrices ut at turpis. Aliquam commodo leo at odio congue vulputate. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Nunc mollis scelerisque leo sed rhoncus. Aliquam ut justo felis, pharetra scelerisque dolor. Quisque vel est sit amet ipsum imperdiet congue. Ut egestas porta nisl sed commodo. Morbi hendrerit quam sodales nibh aliquet vel sagittis lorem ultrices. Quisque posuere, sapien pretium aliquam ornare, felis arcu imperdiet mi, in molestie magna lacus at enim. Fusce quis lorem neque, id pretium tortor. Nullam ullamcorper felis augue. Nunc nec erat libero, vitae semper lacus. Duis euismod blandit nibh vitae convallis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae;<p></p>',
           'summary' => '',
-          'format' => 'php_code',
+          'format' => 'full_html',
         ),
       ),
     ),
@@ -2107,7 +2107,7 @@ function datapublic_demo_content_defaults() {
       'und' => array(
         0 => array(
           'value' => 'Be safe. Practice road safety.',
-          'format' => 'php_code',
+          'format' => 'full_html',
         ),
       ),
     ),

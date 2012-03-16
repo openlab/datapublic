@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the DataPublic Contexts feature.
+ */
+
+include_once('datapublic_contexts.features.inc');

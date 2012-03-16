@@ -25,6 +25,8 @@ function geocoder_admin_field_selected() {
   if (!geocoder_admin_handler_in_array(jQuery('#edit-instance-widget-settings-geocoder-handler').val(),valid_handlers)) {
   	jQuery('#edit-instance-widget-settings-geocoder-handler').val(valid_handlers[0]);
   }
+  
+  geocoder_admin_handler_selected();
 }
 
 function geocoder_admin_handler_in_array(needle, haystack) {

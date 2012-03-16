@@ -1,0 +1,79 @@
+# $Id$
+#
+# French translation of Drupal (general)
+# Copyright YEAR NAME <EMAIL@ADDRESS>
+# Generated from files:
+#  n/a
+#
+#, fuzzy
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"POT-Creation-Date: 2012-02-14 14:08-0800\n"
+"PO-Revision-Date: 2012-02-14 14:08-0800\n"
+"Last-Translator: NAME <EMAIL@ADDRESS>\n"
+"Language-Team: French <EMAIL@ADDRESS>\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n!=1);\n"
+
+# Dataset/Datasets not set up as plural because this module doesn't provide
+# any instances where e.g. 0 Datasets/1 Dataset/2 Datasets occurs.
+#:
+msgid "Dataset"
+msgstr "Donnée"
+
+#:
+msgid "Datasets"
+msgstr "Données"
+
+#:
+msgid "Search for a dataset"
+msgstr "Chercher par Donnée"
+
+#:
+msgid "Choose a tag"
+msgstr "Choisir un tag"
+
+#:
+msgid "Apply"
+msgstr "Appliquer"
+
+#:
+msgid "Details"
+msgstr "Détails"
+
+#:
+msgid "Released %date"
+msgstr "Publié le %date"
+
+#:
+msgid "Last Updated %date"
+msgstr "Dernière mise à jour %date"
+
+#:
+msgid "Contact"
+msgstr "Contacts"
+
+#:
+msgid "Resources"
+msgstr "Ressources"
+
+#:
+msgid "Downloads"
+msgstr "Téléchargements"
+
+#:
+msgid "More Datasets..."
+msgstr "Plus de Données..."
+
+
+
+
+
+
+
+
+
+

@@ -23,7 +23,8 @@ function datapublic_events_views_default_views() {
   /* Display: Master */
   $handler = $view->new_display('default', 'Master', 'default');
   $handler->display->display_options['title'] = 'Events';
-  $handler->display->display_options['use_more_text'] = 'More events...';
+  $handler->display->display_options['use_more_always'] = TRUE;
+  $handler->display->display_options['use_more_text'] = 'more';
   $handler->display->display_options['access']['type'] = 'perm';
   $handler->display->display_options['cache']['type'] = 'none';
   $handler->display->display_options['query']['type'] = 'views_query';
@@ -284,10 +285,6 @@ function datapublic_events_views_default_views() {
   /* Display: Page: Upcoming Events */
   $handler = $view->new_display('page', 'Page: Upcoming Events', 'page');
   $handler->display->display_options['path'] = 'events';
-  $handler->display->display_options['menu']['title'] = 'Events';
-  $handler->display->display_options['menu']['description'] = 'Events';
-  $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'main-menu';
 
   /* Display: Page: FullCalendar */
   $handler = $view->new_display('fullcalendar', 'Page: FullCalendar', 'fullcalendar_1');
@@ -301,6 +298,13 @@ function datapublic_events_views_default_views() {
   $handler->display->display_options['style_options']['sameWindow'] = TRUE;
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
+  $handler->display->display_options['row_plugin'] = 'fullcalendar_node';
+  $handler->display->display_options['row_options']['custom']['fc_title_field'] = 'title';
+  $handler->display->display_options['row_options']['custom']['fc_url_field'] = 'title';
+  $handler->display->display_options['row_options']['custom']['fc_date_field'] = array();
+  $handler->display->display_options['row_options']['custom']['fc_title'] = 0;
+  $handler->display->display_options['row_options']['custom']['fc_url'] = 0;
+  $handler->display->display_options['row_options']['custom']['fc_date'] = 0;
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Title */
@@ -843,10 +847,6 @@ function datapublic_events_views_default_views() {
     'und' => 'und',
   );
   $handler->display->display_options['path'] = 'events/past';
-  $handler->display->display_options['menu']['title'] = 'Events';
-  $handler->display->display_options['menu']['description'] = 'Events';
-  $handler->display->display_options['menu']['weight'] = '0';
-  $handler->display->display_options['menu']['name'] = 'main-menu';
 
   /* Display: Feed:list */
   $handler = $view->new_display('feed', 'Feed:list', 'feed_1');

@@ -5,8 +5,7 @@ DataPublic Distro
 Please checkout a branch (7.x-1.x)!
 
 
-This is a very early preview beta version. The code will run and install, but
-some features are absent, incomplete or buggy.
+This is a preview BETA version. Feedback, comments, suggestions, bug info is much appreciated.
 
 Preview the site at http://datapublic.openlab.ca/
 

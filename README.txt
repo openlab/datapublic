@@ -9,12 +9,11 @@ Demo site at http://datapublic.openlab.ca/
 
 What's unique:
 * Multilingual
-* Mobile-ready
 * Open Data Catalogue
-* Modular Architecture
-* Content Management 
-* Social Media
-* Open Source
+* oData Feed Embedding
+* oEmbed Video Content
+* Event Management
+* Mobile Responsive Theme
 
 What you get:
 * Complete portal solution for citizen engagement

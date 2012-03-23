@@ -1,9 +1,11 @@
 DataPublic: a web portal for Open Government initiatives
+
 --------------------------------------------------------------------------------
 Please checkout a branch (7.x-1.x)!
+--------------------------------------------------------------------------------
+
 This is a preview BETA version. Feedback, comments, suggestions, bug info is much appreciated.
 Demo site at http://datapublic.openlab.ca/
---------------------------------------------------------------------------------
 
 What's unique:
 * Multilingual
@@ -25,8 +27,9 @@ fork the project.
 
 --------------------------------------------------------------------------------
 DataPublic, associated theme, modules & features are a community project with contributions and sponsorship by:
-* Raised Eyebrow
-* Make Web Not War
-* RedBit Development 
-* OpenHalton
-* OpenHamilton
+* Raised Eyebrow : http://raisedeyebrow.com
+* Make Web Not War : http://webnotwar.ca
+* RedBit Development : http://redbitdev.com
+* OpenHalton : http://openhalton.ca
+* OpenHamilton : http://openhamilton.ca
+--------------------------------------------------------------------------------

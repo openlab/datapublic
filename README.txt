@@ -6,6 +6,7 @@ Please checkout a branch (7.x-1.x)!
 
 This is a preview BETA version. Feedback, comments, suggestions, bug info is much appreciated.
 Demo site at http://datapublic.openlab.ca/
+Drupal install profile at http://drupal.org/project/datapublic 
 
 What's unique:
 * Multilingual

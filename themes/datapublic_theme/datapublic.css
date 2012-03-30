@@ -1,0 +1,445 @@
+html { font-size: 62.5%; }
+body { color: #666; font-size: 14px; font-size: 1.4rem; } /* =14px */
+.row { background: none; }
+
+.container {background: #EAEAE3 url(images/bg-gradient.jpg) top left repeat-x }
+/* -----------------------------------------
+   HTML Element Styles
+----------------------------------------- */
+li a.active, a { color: #0185a4; }
+a:hover { color: #a5b33a; }
+h1,h2,h3,h4,h5,h6 { color: #666; }
+
+#main h1, h1 { 
+  font-size: 40px;
+  font-size: 4.0rem; /* =40px */
+  font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif; 
+} 
+
+#skip-link {
+  position: absolute;
+  left: -999em;
+}
+
+#main h2, h2 { font-size: 25px;font-size: 2.5rem; /* =25px */ font-weight: bold; } 
+#main h3, h3 { font-size: 18px;font-size: 1.8rem; /* =18px */ font-weight: bold; } 
+#main h4, h4 { font-size: 14px;font-size: 1.4rem; } /* =14px */
+#main h5, h5 { font-size: 12px;font-size: 1.2rem; } /* =12px */
+#main h1, #main h2, #main h3, #main h4, #main h5, #main h6 { line-height: 1.2; margin: 0 0 20px 0; }
+#main p, #main ul, #main ol, #main dd, #main pre, #main hr { margin-bottom: 24px; }
+#main ul, #main ol { margin: 0 0 18px 1.5em; }
+#main ul { list-style: square; }
+#main ol { list-style: decimal; }
+.front #wrapper { margin-top: 0; }
+#main ul.inline { margin-left: 0; margin-top: 10px; }
+#main ul.inline li { padding-left: 0; }
+
+table { width: 100% }
+table th a { color: #333; text-transform: uppercase; text-decoration: underline; }
+table thead tr th,
+table tfoot tr th,
+.view .views-exposed-widget {   
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+  font-weight: bold; 
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+
+/* -----------------------------------------
+   Block defaults
+----------------------------------------- */
+#main #block-system-main,
+#main #block-system-main > .content,
+#main #block-system-main .node .content { background: none; border: none; padding: 0; }
+
+table tbody tr:nth-child(even), table thead, table tfoot { background: #f8fafa; }
+
+#main .block { margin-bottom: 20px; }
+#main .block .content { padding: 19px 11px; }
+
+#page .block .title {
+  background: transparent url(images/title-shadow.png) bottom left no-repeat;
+  padding: 9px 0 5px 11px;
+}
+
+#page .block .title h2 { 
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+  font-size: 12px;
+	font-size: 1.2rem;
+  font-weight: bolder;
+  letter-spacing: 0.150em;
+	padding: 0 0 5px 0; 
+	margin-bottom: 0; 
+	text-transform: uppercase;
+}
+
+
+
+#main .block .title h2 { color: #a5b33a; }
+.node-type-dataset #main .block .title h2 { font-size: 15px; font-size: 1.5rem; }
+
+#footer .block .title h2 { color: #fff; }
+
+
+/* -----------------------------------------
+   Views defaults
+----------------------------------------- */
+#main .view .views-row { margin-bottom: 18px; }
+#main .view .views-row h2, 
+#main .view .views-row h3 { font-family: Georgia, Times, sans-serif; font-size:18px; font-size:1.8rem; font-weight: normal; margin: 0 0 9px 0; line-height: 1.2;}
+#main .view .views-row .subheader { margin: 0 0 9px 0;}
+#main .view ul.block-grid { margin: 0; }
+#main .view table h4 { margin: 0; }
+
+.block-grid .views-row { height: 180px; }
+
+.view .more-link a {
+  color: #bd0303;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+  font-weight: bold;
+  font-size: 11px;
+  font-size: 1.1rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.view .more-link a:hover { color: #a5b33a; }
+
+.view .subtitle, 
+.field-name-field-profile-job-title,
+.field-name-field-profile-department,
+.node div.submitted {  
+  color: #a6a689; 
+  font-size: 11px; 
+  font-size: 1.1rem; 
+  font-weight: bold; 
+  margin-bottom: 14px; 
+  text-transform: uppercase; 
+}
+
+.view .subtitle a { font-weight: normal; }
+
+
+/* -----------------------------------------
+   Header 
+----------------------------------------- */
+
+#header-wrapper { height: 137px; overflow: hidden; }
+#logo img{ float: right; margin-top: 8px;}
+
+#header-region { min-height: 40px; }
+
+.hide-on-phones #site-name-description-wrap { }
+#site-name { font-size: 40px; font-size: 4.0rem; line-height: 1.25; }
+#site-name a { color: #333; }
+
+#site-name, #site-slogan { margin-bottom: 0; }
+#site-slogan { font-style: italic; }
+
+#site-name, #site-slogan {  
+  font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif; 
+}
+
+
+/* -----------------------------------------
+   Header: Languages and Search Block
+----------------------------------------- */
+
+/* Language links */
+#block-locale-language { margin-top: 10px; position: absolute; right: 28%;}
+#block-locale-language div.title { display: none; }
+#block-locale-language ul li { display: inline; }
+#block-locale-language ul li a { border-left: 1px solid #eaeae3; padding: 6px 11px; }
+#block-locale-language ul li.active a { color: #a6a689; border: none; }
+
+
+/* Search block */
+#block-search-form, #block-search-form--2 { border-left: 1px solid #eaeae3; float: left; position: absolute; right: 0px; }
+#block-search-form form, #block-search-form--2 form { margin:10px ; }
+#block-search-form .form-submit, #block-search-form--2 .form-submit { padding: 6px 10px; text-transform: uppercase; }
+
+/* -----------------------------------------
+   Header: Navigation and Breadcrumb
+----------------------------------------- */
+
+#utilities { background: transparent url(images/nav-shadow.png) top center no-repeat; }
+#breadcrumb-row { color: #666; padding-bottom: 0; }
+#breadcrumb-row #breadcrumb { background: none; font-size: 9px; font-size: 0.9rem; font-weight:bold; letter-spacing: 0.15em; padding: 0 0 30px 0; text-transform: uppercase; }	
+#breadcrumb a { color: #6c9400; }
+#branding #access { background: none;  }
+
+/** SUPERFISH SKIN **/
+/* visited pseudo selector so IE6 applies text colour*/
+
+/* First Level */
+.sf-menu a, .sf-menu a:visited  { 
+  color: #0185a4; 
+  font-size:11px; 
+  font-size:1.1rem; 
+  font-weight: bold; 
+  letter-spacing: 0.1000em; 
+  padding: 10px; 
+  line-height: 1.32; 
+  text-transform: uppercase;
+}
+
+.sf-menu li.sf-depth-1 {	background: none; padding: 14px 5px 10px 5px; } /* List item */
+.sf-menu li.active-trail, /* Arrow for active trail and for home item (ti for some reason is never active */
+.front .sf-menu li.first { background: transparent url(images/arrow-down.png) 50% 90% no-repeat; border-left: none; }
+
+.sf-menu li.sf-depth-1:hover {  background: transparent url(images/arrow-down.png) 50% 90% no-repeat; }
+.sf-menu li.sf-no-children:hover { background: none; }
+
+.sf-menu li:hover a, .sf-menu li.sfHover a,  /* link hover on all levels */
+.sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active { background: #a5b33a; color: #fff;  }
+
+.sf-menu li.sf-depth-1 a.active, .sf-menu li.active-trail a  { background: #a5b33a; color: #fff; }
+
+
+/* Second Level */
+.sf-menu li ul { background: none;  border: none; } /* list wrapper */
+.sf-menu li li.sf-depth-2 a { background: #0f8ba9; color: #fff; font-size: 14px; font-size: 1.4rem; font-weight: normal; letter-spacing: normal; padding: 7px 11px;  text-transform: none; } /* Second level link */
+.sf-menu li li.sf-depth-2 a:hover,
+.sf-menu li.sf-depth-2 a.active { background: #0f8ba9; color: #bfd61f; } 
+.sf-menu li li.first { margin-top:11px; }
+.sf-menu li li.first, .front .sf-menu li li.first, .sf-menu li.sf-depth-1 li.active-trail  { background-image: none; }
+
+.sf-menu li li.first a { padding-top: 10px; }
+.sf-menu li li.last a { padding-bottom: 10px; }
+
+.sf-menu li:hover ul, .sf-menu li.sfHover ul { left: 5px; top: 3.4em; }
+
+/* Third Level */
+.sf-menu li li li {	background: #a6a6a6; border: none; }
+
+
+/* -----------------------------------------
+   Main Content Area
+----------------------------------------- */
+
+#page .content .button, #page .content .form-submit { background-color: #b0b836; border: none; color: #fff; font-weight: bold; text-transform: uppercase; -webkit-box-shadow: rgba(0, 0, 0, 0.148438) 0px 1px 0px inset; }
+#content .feed-icon { display: none; }
+#main { background: #fff; padding-top: 16px; }
+.not-front #main { border-top: 28px solid #a5b33a; } 
+.page-node #main .subheader { font-size: 9px; font-size: 0.9em; font-weight: bold; }
+.page-node #main .subheader a { font-weight: normal; }
+
+/* -----------------------------------------
+   Pagination
+----------------------------------------- */
+#main .cogito_paginate { background: none; }
+#main .cogito_paginate .pagination li.current a { border-color: #a5b33a; }
+#main .cogito_paginate .pagination li:hover a { border-color: #0185a4; }
+
+/* -----------------------------------------
+   Comments
+----------------------------------------- */
+
+#comments h2.title { 
+  color: #a5b33a;
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+	font-size: 12px;
+	font-size: 1.2rem;
+  font-weight: bolder;
+  letter-spacing: 0.150em;
+	padding: 0 0 5px 0; 
+	margin-bottom: 20px; 
+	text-transform: uppercase;
+}
+
+#comment-form .button { margin: 1rem 1rem 0 0; }
+
+
+/* -----------------------------------------
+   Sidebar
+----------------------------------------- */
+#sidebar-right .content ul { margin-left: 0; }
+#sidebar-right .content ul li { background: transparent url(images/sidenav-li-bg.png) 0 4px no-repeat; font-weight: bold; list-style: none; padding: 0 0 0 12px; margin: 0 0 12px 0; }
+
+
+/* -----------------------------------------
+   Leadership
+----------------------------------------- */
+.node-profile .field-item { margin-bottom: 10px; }
+.node-profile footer, .node-profile .field-group-div { clear: both; }
+.node-profile .field-group-div { padding-top: 20px; }
+.node-profile .field-item img { float: left; }
+.node-profile .field-item img, .view-profiles .staff-photo { margin: 0 20px 0 0;}
+
+
+/* -----------------------------------------
+   Services
+----------------------------------------- */
+#main #block-views-services-block .content { padding: 19px 0 0 0; }
+#main #block-views-services-block .content li { margin-bottom: 0; }
+
+
+/* -----------------------------------------
+   Documents
+----------------------------------------- */
+.node-type-document .node-document div.submitted { margin-bottom: 0; }
+.node-document #document-download-btn { margin: 1em 0; }
+.node-document #document-download-btn .button { font-size: 14px; font-size: 1.4rem; }
+.node-document #document-download-btn .button a { color: #fff;  font-size: 18px; font-size: 1.8rem; }
+
+/* -----------------------------------------
+   Datasets
+----------------------------------------- */
+.view-datasets .views-exposed-widget input { font-size: 14px; font-size: 1.4rem; padding: 5px;  }
+.view-datasets .views-exposed-widget input.form-autocomplete { background-position: 100% 8px ;}
+.view-datasets .views-exposed-widget input.throbbing { background-position: 100% -12px; }
+
+.view-datasets .views-submit-button { padding-top: 1em; }
+.view-datasets .views-submit-button .button { padding: 8px; }
+
+.views-field-field-dataset-csv span,
+.views-field-field-dataset-dwg span,
+.views-field-field-dataset-kml span,
+.views-field-field-dataset-kmz span,
+.views-field-field-dataset-shp span,
+.views-field-field-dataset-xls span,
+.views-field-field-dataset-xml span,
+.views-field-field-dataset-api span {
+  padding: 1px 3px 2px;
+  font-size: 9.7px;
+  font-size: 0.975rem;
+  font-weight: bold;
+  color: #ffffff;
+  text-transform: uppercase;
+  white-space: nowrap;
+  background-color: #B0B836;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+}
+
+.view-datasets .views-field-field-dataset-api span { margin-right: 0.5rem; }
+
+
+#block-views-datasets-block-1 { background: none; }
+#main #block-views-datasets-block-1 .content { padding: 0; }
+
+#main .view-datasets .view-filters,
+#main .node-dataset fieldset {
+  background-color: #f8fafa;
+  margin-bottom: 20px;
+  padding: 18px;
+  min-height: 20px;
+  border: 1px solid #d6d6d6;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+}
+
+#main .view-datasets .view-filters { padding: 0 18px; }
+
+#main .node-dataset h2 { color: #76a100; margin: 0 0 9px 0; }
+#main .node-dataset h3 { 
+  color: #a6a689;
+  font-size: 12px;
+  font-size: 1.2rem; 
+  font-weight: bold; 
+  margin: 0 0 8px 0;
+  text-transform: uppercase; 
+}
+
+#main .node-dataset h4 { margin: 0; }
+#main #block-system-main .node-dataset .block .content {
+  padding: 19px 11px;
+}
+
+.node-dataset .field-type-datetime { margin-bottom: 10px; }
+.node-dataset table { width: 100% }
+
+
+/* -----------------------------------------
+   Slideshow
+----------------------------------------- */
+#block-views-slideshow-block .view-id-slideshow .orbit-wrapper .views-row.orbit-slide { background: #a4b231; }
+
+
+div.orbit-wrapper .orbit-title,
+div.orbit-wrapper .orbit-title a {
+  font-size: 35px;
+  font-size: 3.5rem;
+  line-height: 1.1;
+	color: #fff;
+  font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif; }
+
+div.orbit-wrapper .orbit-body { line-height: 1.4; }
+#block-views-slideshow-block .orbit-image { right: 0; }
+
+
+#block-views-slideshow-block .view-id-slideshow .orbit-wrapper .views-row .orbit-content {
+  -webkit-box-shadow: none;
+  background: transparent;
+  padding: 40px 45px;
+  margin: 0;
+  width: 290px;
+}
+
+div.orbit-wrapper div.slider-nav span { width: 33px; height: 33px; margin-top: -16px; }
+
+div.orbit-wrapper div.slider-nav span.right {
+  background: transparent url('images/slides-bg-direction-nav.png') no-repeat 0 0;
+  background-position: -34px 0;
+  right: -10px;
+}
+
+div.orbit-wrapper div.slider-nav span.right:hover {
+  background: transparent url('images/slides-bg-direction-nav-over.png') no-repeat 0 0;
+  background-position: -34px 0;
+  right: -10px;
+}
+
+div.orbit-wrapper div.slider-nav span.left {
+  background: transparent url('images/slides-bg-direction-nav.png') no-repeat 0 0;
+  left: -10px;
+}
+
+div.orbit-wrapper div.slider-nav span.left:hover {
+  background: transparent url('images/slides-bg-direction-nav-over.png') no-repeat 0 0;
+  left: -10px;
+}
+
+div.orbit-wrapper .orbit-caption { color: #333; background: rgba(246,246,246,.8); }
+
+
+/* -----------------------------------------
+   Footer
+----------------------------------------- */
+#footer { background: #0185a4; color: #fff; padding: 35px 0; }
+#footer a { color: #C0d61f; }
+
+#footer .block .title { background: none; padding-left: 0; padding-bottom: 25px; }
+
+#footer #block-views-tweets-block .left { margin: 0 10px 0 0;}
+#footer #block-follow-site .follow-links a {
+  float: left;
+  text-indent: -999em;
+}
+
+.hide{ display: none;}
+
+/* -----------------------------------------
+   Mobile Compatibility
+----------------------------------------- */
+
+@media only screen and (max-width: 767px) {
+  
+  
+  .container { background: #fff; background-image: none;}
+  
+  /*   Header re-jigging */
+  #block-search-form { float: right; position: static;}
+  #block-locale-language{ float: left; position: static;}
+  .sf-menu li.sf-depth-1 { padding: 4px 5px 2px 5px; }
+  
+  /*   Orbit rejigging */
+  #footer .block { margin: 0 10px; }
+  #block-views-slideshow-block .view-id-slideshow .orbit-wrapper .views-row .orbit-content{ position: absolute; bottom: 20px;}
+  div.orbit-wrapper .orbit-title, div.orbit-wrapper .orbit-title a {font-size: 20px; font-size: 2rem;}
+  div.orbit-wrapper .orbit-body { display: none; }
+  div.orbit-wrapper .orbit-caption { overflow: hidden;position: absolute; height: 1px; width: 1px;}
+}

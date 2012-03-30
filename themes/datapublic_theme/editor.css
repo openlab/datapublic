@@ -1,0 +1,38 @@
+/* -----------------------------------------
+   HTML Element Styles
+----------------------------------------- */
+html { font-size: 62.5%; }
+body { color: #666; font-size: 14px; font-size: 1.4rem; } /* =14px */
+li a.active, a { color: #0185a4; }
+a:hover { color: #a5b33a; }
+h1,h2,h3,h4,h5,h6 { color: #666; }
+h1 { 
+  font-size: 40px;
+  font-size: 4.0rem; /* =40px */
+  font-family: Constantia, "Lucida Bright", Lucidabright, "Lucida Serif", Lucida, "DejaVu Serif", "Bitstream Vera Serif", "Liberation Serif", Georgia, serif; 
+} 
+h2 { font-size: 25px;font-size: 2.5rem; /* =25px */ font-weight: bold; } 
+h3 { font-size: 18px;font-size: 1.8rem; /* =18px */ font-weight: bold; } 
+h4 { font-size: 14px;font-size: 1.4rem; } /* =14px */
+h5 { font-size: 12px;font-size: 1.2rem; } /* =12px */
+h1, h2, h3, h4, h5, h6 { line-height: 1.2; margin: 0 0 20px 0; }
+p, ul, ol, dd, pre, hr { margin-bottom: 24px; }
+ul, ol { margin: 0 0 18px 1.5em; }
+ul { list-style: square; }
+ol { list-style: decimal; }
+ul.inline { margin-left: 0; margin-top: 10px; }
+ul.inline li { padding-left: 0; }
+
+blockquote { margin: 0 0 18px; padding: 9px 20px 0 19px; border-left: 1px solid #ddd; }
+blockquote, blockquote p { line-height: 20px; color: #777; }
+
+table { width: 100% }
+table th a { color: #333; text-transform: uppercase; text-decoration: underline; }
+table thead tr th,
+table tfoot tr th {   
+  font-family: "HelveticaNeue-CondensedBold", "Helvetica Neue", Helvetica, Arial, sans-serif; 
+  font-weight: bold; 
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+

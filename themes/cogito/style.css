@@ -1,0 +1,141 @@
+/*****************************************************************************************************************************
+    
+    COGITO Wireframe Theme: 
+    
+    Basically just a few lines of presentation on top of Foundation.css to bridge the gap between
+    foundation and drupal CSS.
+
+
+    WARNING!!!! WE RECOMMEND THAT YOU NOT CHANGE ANYTHING IN THIS FILE OR EVEN THIS FOLDER!!! 
+    USE A CHILD THEME! CHECK OUT README.TXT AND "STARTER-CHILD" FOLDER FOR INSTRUCTIONS  
+*****************************************************************************************************************************/
+
+
+/* -----------------------------------------
+   Global CSS for Cogito
+----------------------------------------- */
+body {  background: #EEE;  padding-bottom: 60px; }
+.row {  background: #fff; }
+
+#content h2{  font-size: 1.2em;}
+#content h1{  font-size: 2.5em;}
+ 
+#content .entry-content ul, #content .entry-content ol {  margin-left: 30px; }
+#content .entry-content li {  list-style-type: disc; margin-bottom: 0; }
+
+h1, h2, h3, h4, h5, h6 { font-family: "Helvetica Neue", "Helvetica", Arial, sans-serif; }
+
+/* -----------------------------------------
+   Drupal Regions
+----------------------------------------- */
+
+div.highlight { margin-bottom: 12px; }
+
+#branding img { vertical-align: top; }
+
+/* -----------------------------------------
+   Breadcrumbs
+----------------------------------------- */
+
+#breadcrumb-row {
+  padding-bottom: 18px;
+}
+#breadcrumb-row #breadcrumb {
+  padding: 7px 14px;
+  text-shadow: 0 1px 0 #ffffff;
+  background-color: #f5f5f5;
+}
+#breadcrumb .divider {
+  padding: 0 5px;
+  color: #bfbfbf;
+}
+#breadcrumb .active a {
+  color: #404040;
+}
+
+/* -----------------------------------------
+   FIX THE ADMIN MENU
+----------------------------------------- */
+
+body.admin-menu { position: static!important; }
+
+
+/* -----------------------------------------
+   Main
+----------------------------------------- */
+
+#main {
+  padding-top:20px;
+}
+
+#main h1 {
+  line-height: 1em;
+}
+#main h2{
+  font-size:2em;
+}
+#main h3{
+  font-size:1.2em;
+}
+#main h4 {
+  font-size:1em;
+  font-weight: bold;
+}
+
+
+/* -----------------------------------------
+   Navigation
+----------------------------------------- */
+
+#access{	background: #3c3c3c; }
+
+/*** SUPERFISH SKIN ***/
+.sf-menu a, .sf-menu a:visited  { /* visited pseudo selector so IE6 applies text colour*/
+	color: #fff;
+}
+
+.sf-menu li {
+	background: #3c3c3c;
+}
+
+.sf-menu li li {
+	background:		#969696;
+}
+
+.sf-menu li li a {
+  color: #fff;
+}
+
+.sf-menu li li li {
+	background:		#a6a6a6;
+}
+
+.sf-menu li:hover, .sf-menu li.sfHover,
+.sf-menu a:focus, .sf-menu a:hover, .sf-menu a:active {
+	background:		#3c3c3c;
+	outline:		0;
+}
+
+
+/* -----------------------------------------
+   Footer
+----------------------------------------- */
+
+footer.row {
+  border-top: solid 1px #e6e6e6;
+  padding-top: 20px; }
+footer.row h2 {
+  color: #444444;
+  font-size: 14px;
+  font-size: 1.4rem;
+  margin-bottom: 4px; }
+footer.row p {
+  color: #626262;
+  font-size: 12px;
+  font-size: 1.2rem;
+  line-height: 18px; }
+footer.row a {
+  color: #222222; }
+footer.row a:hover {
+  text-decoration: underline; }
+ 

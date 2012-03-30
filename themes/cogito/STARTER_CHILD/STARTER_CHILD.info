@@ -1,0 +1,73 @@
+
+; Theme Info -----------------------------------------------------------------
+; required information about the theme
+
+name = Cogito Child STARTER THEME (see readme.txt file for usage instructions)
+description = Cogito is an HTML5 theme based on the Foundation Framework by Zurb.
+base theme = cogito
+core = 7.x
+engine = phptemplate
+
+; Stylesheets  ---------------------------------------------------------------
+; We use [screen] instead of [all] to avoid browser styles affecting
+; other media types. IE stylesheets are loaded through template.php
+
+; Uncomment the following line to overwrite cogito's base style
+;stylesheets[screen][] = style.css
+
+; Rename this to your directory name and put all your CSS there
+stylesheets[screen][] = STARTER_THEME.css
+
+; Regions --------------------------------------------------------------------
+; these content regions are available for block placement
+; some are special hidden regions: help
+
+; these are the stock regions
+
+regions[header] = Header
+regions[footer] = Footer
+regions[content] = Content
+regions[highlighted] = Highlighted
+regions[sidebar_first] = Left Sidebar
+regions[sidebar_second] = Right Sidebar
+regions[nav] = Navigation
+regions[help] = Help
+regions[page_top] = Page Top
+regions[page_bottom] = Page Bottom
+
+; Regional block aligns (h for horizontal, v for vertical)
+; Set these to determine if blocks should stack or be inline
+
+settings[region][header]          = h
+settings[region][footer]          = h
+settings[region][content]         = v
+settings[region][highlighted]     = v
+settings[region][sidebar_first]   = v
+settings[region][sidebar_second]  = v
+settings[region][nav]             = h
+settings[region][help]            = v
+
+; Region widths corresponding to the Foundation grid
+; Each block must add up to 12 (rsb = right sidebar etc...)
+
+settings[three_columns_left] 	  = 3
+settings[three_columns_content]	= 6
+settings[three_columns_right]	  = 3
+
+settings[two_columns_lsb_left] 	    = 3
+settings[two_columns_lsb_content] 	= 9
+
+settings[two_columns_rsb_right]     = 3
+settings[two_columns_rsb_content] 	= 9
+
+settings[one_column_content] 	= 10
+
+
+; Options --------------------------------------------------------------------
+; these are the checkboxes that are available on the theme settings page.
+
+settings[breadcrumb_display]   = yes
+settings[breadcrumb_separator] = ' › '
+settings[breadcrumb_home]      = 1
+settings[breadcrumb_trailing]  = 0
+settings[breadcrumb_title]     = 0

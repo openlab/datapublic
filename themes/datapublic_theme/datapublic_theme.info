@@ -1,0 +1,74 @@
+; Theme Info -----------------------------------------------------------------
+; required information about the theme
+
+name = DataPublic
+description = DataPublic is the default theme for the DataPublic distribution. It is based on Cogito. Cogito is the RE foundation theme and is based on Boron which is a base theme for Drupal 7 which converts the core template files to HTML5 markup.
+base theme = cogito
+core = 7.x
+version = 7.x-1.0-beta1
+engine = phptemplate
+
+; Stylesheets  ---------------------------------------------------------------
+; We use [screen] instead of [all] to avoid browser styles affecting
+; other media types. IE stylesheets are loaded through template.php
+
+; NOTE: Uncomment the style.css line to overwrite cogito's base style
+;stylesheets[screen][] = style.css
+stylesheets[screen][] = datapublic.css
+
+; Regions --------------------------------------------------------------------
+; these content regions are available for block placement
+; some are special hidden regions: help
+
+regions[header] = Header
+regions[footer] = Footer
+regions[content] = Content
+regions[highlighted] = Highlighted
+regions[sidebar_first] = Left Sidebar
+regions[sidebar_second] = Right Sidebar
+regions[nav] = Navigation
+regions[nav_mobile] = Navigation (mobile)
+regions[help] = Help
+regions[top_page] = Page Top
+regions[bottom_page] = Page Bottom
+regions[post_content1] = Post Content 1
+regions[post_content2] = Post Content 2
+
+; Regional block aligns (h for horizontal, v for vertical)
+; Set these to determine if blocks should stack or be inline
+settings[region][header] 		= h
+settings[region][footer] 		= h
+settings[region][content] 	= v
+settings[region][highlighted] = v
+settings[region][sidebar_first] 	= v
+settings[region][sidebar_second] 	= v
+settings[region][nav] 	= h
+settings[region][nav_mobile] 	= h
+settings[region][help] 	= v
+settings[region][top_page] 			= v
+settings[region][bottom_page] 	= h
+settings[region][post_content1] = h
+settings[region][post_content2] = h
+
+; Options --------------------------------------------------------------------
+; these are the checkboxes that are available on the theme settings page.
+
+
+; additional theme settings
+settings[breadcrumb_display]   = yes
+settings[breadcrumb_separator] = ' / '
+settings[breadcrumb_home]      = 1
+settings[breadcrumb_trailing]  = 0
+settings[breadcrumb_title]     = 0
+
+; Region widths (rsb = right sidebar)
+settings[three_columns_left] 	  = 3
+settings[three_columns_content]	= 6
+settings[three_columns_right]	  = 3
+
+settings[two_columns_lsb_left] 	    = 4
+settings[two_columns_lsb_content] 	= 8
+settings[two_columns_rsb_right]     = 4
+settings[two_columns_rsb_content] 	= 8
+
+settings[one_column_content] 	= 12

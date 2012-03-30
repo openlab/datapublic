@@ -1,0 +1,97 @@
+
+; Theme Info -----------------------------------------------------------------
+; required information about the theme
+
+name = Cogito (DO NOT ENABLE. USE A CHILD THEME INSTEAD. See Readme.txt)
+description = Cogito is an HTML5 theme based on the Foundation Framework by Zurb.
+core = 7.x
+engine = phptemplate
+
+; STYLESHEETS  ---------------------------------------------------------------
+
+; We use [screen] instead of [all] to avoid browser styles affecting
+; other media types. IE stylesheets are loaded through template.php
+
+stylesheets[screen][] = foundation/stylesheets/foundation.css
+stylesheets[screen][] = css/superfish.css
+stylesheets[screen][] = style.css
+
+;We need to drop some of Drupal's core styles
+stylesheets[all][] = system.css
+stylesheets[all][] = system.theme.css
+
+
+; JAVASCRIPT  ---------------------------------------------------------------
+
+scripts[] = foundation/javascripts/foundation.js
+scripts[] = foundation/javascripts/modernizr.foundation.js
+scripts[] = foundation/javascripts/app.js
+
+; REGIONS --------------------------------------------------------------------
+
+; these content regions are available for block placement
+; some are special hidden regions: help
+
+regions[header] = Header
+regions[footer] = Footer
+regions[content] = Content
+regions[highlighted] = Highlighted
+regions[sidebar_first] = Left Sidebar
+regions[sidebar_second] = Right Sidebar
+regions[nav] = Navigation
+regions[help] = Help
+regions[top_page] = Page Top
+regions[bottom_page] = Page Bottom
+
+; Regional block aligns (h for horizontal, v for vertical)
+; Set these to determine if blocks should stack or be inline
+
+settings[region][header] 		= h
+settings[region][footer] 		= h
+settings[region][content] 	= v
+settings[region][highlighted] = v
+settings[region][sidebar_first] 	= v
+settings[region][sidebar_second] 	= v
+settings[region][nav] 	= h
+settings[region][help] 	= v
+settings[region][top_page] 			= v
+settings[region][bottom_page] 	= h
+
+; Region Widths: corresponding to the Foundation grid
+; Each block must add up to 12 (rsb = right sidebar etc...)
+
+settings[three_columns_left] 	  = 3
+settings[three_columns_content]	= 6
+settings[three_columns_right]	  = 3
+
+settings[two_columns_lsb_left] 	    = 3
+settings[two_columns_lsb_content] 	= 9
+
+settings[two_columns_rsb_right]     = 3
+settings[two_columns_rsb_content] 	= 9
+
+settings[one_column_content] 	= 10
+
+
+; Options --------------------------------------------------------------------
+; these are the checkboxes that are available on the theme settings page.
+
+; these are the stock options
+
+features[] = logo
+features[] = name
+features[] = slogan
+features[] = node_user_picture
+features[] = comment_user_picture
+features[] = comment_user_verification
+features[] = favicon
+
+; additional theme settings
+
+settings[breadcrumb_display]   = yes
+settings[breadcrumb_separator] = ' / '
+settings[breadcrumb_home]      = 1
+settings[breadcrumb_trailing]  = 0
+settings[breadcrumb_title]     = 0
+
+

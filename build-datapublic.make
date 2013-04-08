@@ -1,4 +1,4 @@
-core = 7.12
+core = 7.22
 api = 2
 projects[drupal][type] = core
 projects[drupal][patch][] = http://drupal.org/files/issues/object_conversion_menu_router_build-972536-1.patch
